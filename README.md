@@ -66,7 +66,6 @@ print("Is the function continuous?", function.is_continuous())
 
 - **topology.py**: Defines the `Topology` class and methods to operate on topological structures, including checks for various properties (e.g., compactness, connectedness, Hausdorff conditions).
 - **functions.py**: Defines continuous functions between topological spaces and provides tools to study their properties (e.g., continuity, bijectivity, homeomorphisms).
-- **helpers.py**: Contains various utility functions to create specific topologies, like discrete, trivial, Sierpiński, etc.
 - **interactive_notebooks**: A collection of Jupyter notebooks that illustrate the use of the library, allowing users to experiment with topological concepts interactively.
 
 ## Documentation

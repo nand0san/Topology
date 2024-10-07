@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version_string = '0.1.5'
+version_string = '0.1.7'
 
 setup(
     name='finite-topology',
