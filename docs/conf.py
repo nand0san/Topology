@@ -1,15 +1,13 @@
-# Archivo conf.py
-
 import os
 import sys
-from setup import version as version_string
+sys.path.insert(0, os.path.abspath('..'))  # Añadir la ruta raíz del proyecto
 
-sys.path.insert(0, os.path.abspath('..'))
+from version import version_string  # Importar desde version.py
 
 project = 'Topology'
 copyright = '2024, Nand0san'
 author = 'Nand0san'
-version = version_string  # Asignar la versión desde el archivo version.py
+version = version_string
 language = 'en'
 
 templates_path = ['_templates']

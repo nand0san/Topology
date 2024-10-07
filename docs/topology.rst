@@ -18,7 +18,7 @@ A **topology** on a set \\(X\\) is a collection \\(\\tau\\) of subsets of \\(X\\
 
 This class allows working with finite topological spaces, defined by providing a space and a collection of subsets.
 
-.. automodule:: topology
+.. automodule:: finite_topology.topology
    :members:
    :undoc-members:
    :show-inheritance:

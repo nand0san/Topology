@@ -1,7 +1,7 @@
 Known Topologies Module
 =======================
 
-.. automodule:: known_topologies
+.. automodule:: finite_topology.known_topologies
    :members:
    :undoc-members:
    :show-inheritance:

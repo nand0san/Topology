@@ -1,7 +1,7 @@
 Functions Module
 ================
 
-.. automodule:: functions
+.. automodule:: finite_topology.functions
    :members:
    :undoc-members:
    :show-inheritance:

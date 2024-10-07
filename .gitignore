@@ -57,7 +57,7 @@ db.sqlite3-journal
 instance/
 .webassets-cache
 .scrapy
-docs/_build/
+# docs/_build/
 .pybuilder/
 target/
 .pdm.toml
