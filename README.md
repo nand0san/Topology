@@ -76,8 +76,9 @@ Detailed documentation for each function and class can be found in the `docs/` f
 cd docs
 make html
 ```
+Built documentation can be found at: https://nand0san.github.io/Topology/_build/html/index.html
 
-Also, existing jupyter notebooks with examples and details in github.
+Also, existing jupyter notebooks with examples and details in the repository.
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request if you'd like to contribute code or documentation improvements.
