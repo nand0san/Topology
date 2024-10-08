@@ -2,9 +2,9 @@
 from .topology import Topology
 
 
-class ContinuousFunction:
+class Function:
     """
-    Represents a continuous function between two topological spaces.
+    Represents a function between two topological spaces. It can be continous or not.
 
     Attributes:
     - source (Topology): The topological space from which the function originates.
@@ -108,7 +108,7 @@ class ContinuousFunction:
         # Create the inverse function
         inverse_mapping = {v: k for k, v in self.mapping.items()}
         try:
-            inverse_function = ContinuousFunction(self.target, self.source, inverse_mapping)
+            inverse_function = Function(self.target, self.source, inverse_mapping)
         except ValueError as e:
             print(f"Could not create the inverse function: {e}")
             return False

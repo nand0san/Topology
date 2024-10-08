@@ -42,7 +42,7 @@ Here is a simple example demonstrating how to create a discrete topology and a c
 
 ```python
 from finite_topology.known_topologies import create_discrete_topology
-from finite_topology.functions import ContinuousFunction
+from finite_topology.functions import Function
 
 # Define the space
 space = {1, 2, 3}
@@ -58,7 +58,7 @@ target_space = {'a', 'b', 'c'}
 target_topology = create_discrete_topology(target_space)
 
 # Create the continuous function
-function = ContinuousFunction(discrete_topology, target_topology, mapping)
+function = Function(discrete_topology, target_topology, mapping)
 print("Is the function continuous?", function.is_continuous())
 ```
 
