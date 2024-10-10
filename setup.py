@@ -1,10 +1,9 @@
 from setuptools import setup, find_packages
 
-version_string = '0.1.8'
 
 setup(
     name='finite-topology',
-    version=version_string,
+    version='0.1.8',
     author='nand0san',
     author_email='hancaidolosdos@hotmail.com',
     description='A Python library for defining and manipulating topologies on finite sets.',
