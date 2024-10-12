@@ -7,7 +7,7 @@ A Python library for defining, analyzing, and exploring **finite topologies**. T
 - **Construct Common Topologies**: 
   - **Discrete Topology**: Every subset is open.
   - **Indiscrete (Trivial) Topology**: Only the empty set and the entire set are open.
-  - **Sierpiński Topology**: A classic topology on a two-element set.
+  - **Sierpinski Topology**: A classic topology on a two-element set.
   - **Particular Point and Excluded Point Topologies**: Control which points are required or excluded in open sets.
   - **Divisibility Topology**: Topology based on divisibility relations among integers.
   - **Alexandrov Topology**: Topologies that are closed under arbitrary intersections of open sets, useful in domain theory.
