@@ -118,16 +118,19 @@ html.dark {
 <li><a class="reference internal" href="#finite_topology.topology.Topology.get_basis"><code class="docutils literal notranslate"><span class="pre">Topology.get_basis()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.get_boundary"><code class="docutils literal notranslate"><span class="pre">Topology.get_boundary()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.get_closure"><code class="docutils literal notranslate"><span class="pre">Topology.get_closure()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.get_complement"><code class="docutils literal notranslate"><span class="pre">Topology.get_complement()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.get_exterior"><code class="docutils literal notranslate"><span class="pre">Topology.get_exterior()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.get_interior"><code class="docutils literal notranslate"><span class="pre">Topology.get_interior()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.get_ordered_subsets"><code class="docutils literal notranslate"><span class="pre">Topology.get_ordered_subsets()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.identify_topology"><code class="docutils literal notranslate"><span class="pre">Topology.identify_topology()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_T0"><code class="docutils literal notranslate"><span class="pre">Topology.is_T0()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_T1"><code class="docutils literal notranslate"><span class="pre">Topology.is_T1()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_closed"><code class="docutils literal notranslate"><span class="pre">Topology.is_closed()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_compact"><code class="docutils literal notranslate"><span class="pre">Topology.is_compact()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_connected"><code class="docutils literal notranslate"><span class="pre">Topology.is_connected()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_discrete"><code class="docutils literal notranslate"><span class="pre">Topology.is_discrete()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_hausdorff"><code class="docutils literal notranslate"><span class="pre">Topology.is_hausdorff()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_open"><code class="docutils literal notranslate"><span class="pre">Topology.is_open()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_separable"><code class="docutils literal notranslate"><span class="pre">Topology.is_separable()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_structurally_equal"><code class="docutils literal notranslate"><span class="pre">Topology.is_structurally_equal()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_topology"><code class="docutils literal notranslate"><span class="pre">Topology.is_topology()</span></code></a></li>
@@ -218,14 +221,15 @@ bool: True if the new set is added successfully and the collection remains a top
 <dt class="sig sig-object py" id="finite_topology.topology.Topology.find_dense_subset">
 <span class="sig-name descname"><span class="pre">find_dense_subset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.find_dense_subset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds and returns a dense subset of the topological space.</p>
-<p>A <strong>dense subset</strong> of a topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is a subset <span class="math notranslate nohighlight">\(A \subseteq X\)</span> such that the closure of <span class="math notranslate nohighlight">\(A\)</span> is equal to <span class="math notranslate nohighlight">\(X\)</span>. In other words, <span class="math notranslate nohighlight">\(A\)</span> is dense if every point in <span class="math notranslate nohighlight">\(X\)</span> is either in <span class="math notranslate nohighlight">\(A\)</span> or is a limit point of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>A <strong>dense subset</strong> of a topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is a subset <span class="math notranslate nohighlight">\(A \subseteq X\)</span> such that the closure of <span class="math notranslate nohighlight">\(A\)</span> is equal to <span class="math notranslate nohighlight">\(X\)</span>.
+In other words, <span class="math notranslate nohighlight">\(A\)</span> is dense if every point in <span class="math notranslate nohighlight">\(X\)</span> is either in <span class="math notranslate nohighlight">\(A\)</span> or is a limit point of <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\text{A set } A \text{ is dense in } X \text{ if } \overline{A} = X\]</div>
+\[A \text{ is dense in } X \text{ if } \overline{A} = X\]</div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A dense subset if it exists, otherwise an empty set.</p>
+<dd class="field-odd"><p>A dense subset if it exists, otherwise the entire space if it is the only dense subset (trivial case).</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>set</p>
@@ -294,6 +298,21 @@ bool: True if the new set is added successfully and the collection remains a top
 <dd class="field-odd"><p>set</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.get_complement">
+<span class="sig-name descname"><span class="pre">get_complement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.get_complement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the complement of the given subset in the topological space.</p>
+<p>The <strong>complement</strong> of a set (A) in a topological space (X) is the set of elements in (X) that are not in (A).</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Complement}(A) = X \setminus A\]</div>
+</div>
+<p>Parameters:
+subset (set): The subset for which the complement is to be obtained.</p>
+<p>Returns:
+set: The complement of the subset in the topological space.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -401,6 +420,17 @@ its complement is an open set.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_closed">
+<span class="sig-name descname"><span class="pre">is_closed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_closed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the given subset is closed in the topological space.</p>
+<p>A set is <strong>closed</strong> if its complement is open.</p>
+<p>Parameters:
+subset (set): The set to be checked.</p>
+<p>Returns:
+bool: True if the subset is closed, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="finite_topology.topology.Topology.is_compact">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_compact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_compact" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the topological space is compact.</p>
@@ -488,6 +518,16 @@ This means the topology <span class="math notranslate nohighlight">\(\tau\)</spa
 <dd class="field-even"><p>bool</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_open">
+<span class="sig-name descname"><span class="pre">is_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the given subset is open in the topological space.</p>
+<p>Parameters:
+subset (set): The set to be checked.</p>
+<p>Returns:
+bool: True if the subset is open, False otherwise.</p>
 </dd></dl>
 
 <dl class="py method">

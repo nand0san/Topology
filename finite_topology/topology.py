@@ -86,8 +86,11 @@ class Topology:
 
         if new_set not in self.collection_of_subsets:
             self.collection_of_subsets.append(new_set)
-            # TODO: pintar si es cerrado el conjunto añadido, claramente abierto sería pq lo hemos añadido luego sería abiertocerrado o solo abierto.
             print(f"Added the set {new_set} to the collection.")
+            if self.is_open(new_set):
+                print(f"The set {new_set} is open.")
+            if self.is_closed(new_set):
+                print(f"The set {new_set} is closed.")
         else:
             print(f"The set {new_set} is already in the collection.")
 
@@ -344,25 +347,93 @@ class Topology:
         # In finite spaces, all topological spaces are compact
         return True
 
+    def is_open(self, subset: set) -> bool:
+        """
+        Checks if the given subset is open in the topological space.
+
+        Parameters:
+        subset (set): The set to be checked.
+
+        Returns:
+        bool: True if the subset is open, False otherwise.
+        """
+        if subset in self.collection_of_subsets:
+            return True
+        else:
+            print(f"The set {sorted(subset)} is not open.")
+            return False
+
+    def is_closed(self, subset: set) -> bool:
+        """
+        Checks if the given subset is closed in the topological space.
+
+        A set is **closed** if its complement is open.
+
+        Parameters:
+        subset (set): The set to be checked.
+
+        Returns:
+        bool: True if the subset is closed, False otherwise.
+        """
+        complement = self.space - subset
+        if complement in self.collection_of_subsets:
+            return True
+        else:
+            print(f"The set {sorted(subset)} is not closed.")
+            return False
+
+    def get_complement(self, subset: set) -> set:
+        """
+        Returns the complement of the given subset in the topological space.
+
+        The **complement** of a set \(A\) in a topological space \(X\) is the set of elements in \(X\) that are not in \(A\).
+
+        .. math::
+
+            \\text{Complement}(A) = X \\setminus A
+
+        Parameters:
+        subset (set): The subset for which the complement is to be obtained.
+
+        Returns:
+        set: The complement of the subset in the topological space.
+        """
+        if not subset.issubset(self.space):
+            raise ValueError(f"The set {subset} is not a subset of the space {self.space}.")
+        return self.space - subset
+
     def find_dense_subset(self) -> set:
         """
         Finds and returns a dense subset of the topological space.
 
-        A **dense subset** of a topological space :math:`(X, \\tau)` is a subset :math:`A \\subseteq X` such that the closure of :math:`A` is equal to :math:`X`. In other words, :math:`A` is dense if every point in :math:`X` is either in :math:`A` or is a limit point of :math:`A`.
+        A **dense subset** of a topological space :math:`(X, \\tau)` is a subset :math:`A \\subseteq X` such that the closure of :math:`A` is equal to :math:`X`.
+        In other words, :math:`A` is dense if every point in :math:`X` is either in :math:`A` or is a limit point of :math:`A`.
 
         .. math::
 
-            \\text{A set } A \\text{ is dense in } X \\text{ if } \\overline{A} = X
+            A \\text{ is dense in } X \\text{ if } \\overline{A} = X
 
         Returns:
-            set: A dense subset if it exists, otherwise an empty set.
+            set: A dense subset if it exists, otherwise the entire space if it is the only dense subset (trivial case).
         """
+        dense_subsets = []
+
         # In finite spaces, find the smallest subset whose closure is the entire space
         for r in range(1, len(self.space) + 1):
             for subset in combinations(self.space, r):
                 closure = self.get_closure(set(subset))
                 if closure == self.space:
-                    return set(subset)
+                    dense_subsets.append(set(subset))
+
+        # If the only dense subset is the entire space, return it with a note that it's trivial
+        if len(dense_subsets) == 1 and dense_subsets[0] == self.space:
+            print("The only dense subset is the entire space, which is a trivial case in finite topologies.")
+            return self.space
+
+        # Return the smallest non-trivial dense subset
+        if dense_subsets:
+            return min(dense_subsets, key=len)
+
         return set()
 
     @staticmethod
