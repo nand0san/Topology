@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Known Topologies Module - Topology documentation</title>
+    <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Functions Module" href="functions.html" />
+  <script>
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="stylesheet" href="_static/pygments.css?v=2023.6.8" type="text/css" />
+    <link rel="stylesheet" href="_static/shibuya.css?v=2023.6.8" type="text/css" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=2023.6.8" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:4rem;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));
+  --sy-rc-theme:143, 118, 214;--sy-rc-bg:255, 255, 255;--sy-rc-invert:0, 0, 0;--sy-rc-text:0, 0, 0;--sy-c-bg:#fff;--sy-c-bg-weak:#f9f9f9;--sy-c-text:#374151;--sy-c-text-weak:#6b7280;--sy-c-heading:#111827;--sy-c-bold:#111827;--sy-c-foot-text:#232226;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#f0f0f0;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:143, 118, 214;--sy-rc-bg:255, 255, 255;--sy-rc-invert:0, 0, 0;--sy-rc-text:0, 0, 0;--sy-c-bg:#fff;--sy-c-bg-weak:#f9f9f9;--sy-c-text:#374151;--sy-c-text-weak:#6b7280;--sy-c-heading:#111827;--sy-c-bold:#111827;--sy-c-foot-text:#232226;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#f0f0f0;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:143, 118, 214;--sy-rc-bg:18, 18, 18;--sy-rc-invert:255, 255, 255;--sy-rc-text:255, 255, 255;--sy-c-bg:#121212;--sy-c-bg-weak:#212833;--sy-c-text:#cedbea;--sy-c-text-weak:#77889f;--sy-c-heading:#ebf0f4;--sy-c-bold:#ebf0f4;--sy-c-foot-text:#eee;--sy-c-foot-bg:#000;--sy-c-foot-divider:#000;
+  }
+}
+html.light {
+  --sy-rc-theme:143, 118, 214;--sy-rc-bg:255, 255, 255;--sy-rc-invert:0, 0, 0;--sy-rc-text:0, 0, 0;--sy-c-bg:#fff;--sy-c-bg-weak:#f9f9f9;--sy-c-text:#374151;--sy-c-text-weak:#6b7280;--sy-c-heading:#111827;--sy-c-bold:#111827;--sy-c-foot-text:#232226;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#f0f0f0;
+}
+html.dark {
+  --sy-rc-theme:143, 118, 214;--sy-rc-bg:18, 18, 18;--sy-rc-invert:255, 255, 255;--sy-rc-text:255, 255, 255;--sy-c-bg:#121212;--sy-c-bg-weak:#212833;--sy-c-text:#cedbea;--sy-c-text-weak:#77889f;--sy-c-heading:#ebf0f4;--sy-c-bold:#ebf0f4;--sy-c-foot-text:#eee;--sy-c-foot-bg:#000;--sy-c-foot-divider:#000;
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Known Topologies Module"/>
+<meta name="twitter:card" content="summary"/></head>
+<body><div class="document"><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <div class="sy-head-links flex items-center">
+      <div class="md:hidden flex items-center">
+        <button class="hamburger js-menu mr-3" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </button>
+      </div>
+      <a class="sy-head-brand" href="index.html">
+        
+        
+        <strong>Topology</strong>
+      </a></div>
+    <div class="sy-head-actions flex gap-2 items-center print:hidden">
+      
+      <div class="hidden md:block"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form>
+      </div>
+      <button class="js-theme theme-switch flex items-center ml-1" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
+        <i class="i-icon theme-icon"></i>
+      </button>
+      
+        <button class="js-menu xl:hidden flex items-center ml-1" aria-label="Show table of contents" type="button" aria-controls="rside" aria-expanded="false">
+          <i class="i-icon outdent"></i>
+        </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-64 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-lside-top md:hidden pt-3 pb-3 px-6">
+        <div class="pt-3"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <button>Go</button>
+</form>
+        </div></div>
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc">
+          <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Known Topologies Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-icon close"></i>
+    </button>
+    <div class="sy-scrollbar px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>Table of Contents</h3>
+    <ul>
+<li><a class="reference internal" href="#finite_topology.known_topologies.create_alexandrov_topology"><code class="docutils literal notranslate"><span class="pre">create_alexandrov_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.known_topologies.create_discrete_topology"><code class="docutils literal notranslate"><span class="pre">create_discrete_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.known_topologies.create_divisibility_topology"><code class="docutils literal notranslate"><span class="pre">create_divisibility_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.known_topologies.create_excluded_point_topology"><code class="docutils literal notranslate"><span class="pre">create_excluded_point_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.known_topologies.create_particular_point_topology"><code class="docutils literal notranslate"><span class="pre">create_particular_point_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.known_topologies.create_sierpinski_topology"><code class="docutils literal notranslate"><span class="pre">create_sierpinski_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.known_topologies.create_topology_from_equivalence"><code class="docutils literal notranslate"><span class="pre">create_topology_from_equivalence()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.known_topologies.create_trivial_topology"><code class="docutils literal notranslate"><span class="pre">create_trivial_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.known_topologies.create_upward_closed_topology"><code class="docutils literal notranslate"><span class="pre">create_upward_closed_topology()</span></code></a></li>
+</ul>
+
+
+  </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div>
+    </div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+    <div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-6 xl:px-12">
+        <article class="yue" role="main">
+          <section id="module-finite_topology.known_topologies">
+<span id="known-topologies-module"></span><h1>Known Topologies Module<a class="headerlink" href="#module-finite_topology.known_topologies" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="finite_topology.known_topologies.create_alexandrov_topology">
+<span class="sig-prename descclassname"><span class="pre">finite_topology.known_topologies.</span></span><span class="sig-name descname"><span class="pre">create_alexandrov_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_relation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.known_topologies.create_alexandrov_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the Alexandrov topology on the given space based on an order relation.</p>
+<p>The <strong>Alexandrov topology</strong> is a topology where arbitrary intersections of open sets are also open. This is particularly useful in <strong>domain theory</strong> and <strong>order theory</strong>, as it ensures that the collection of open sets is closed under arbitrary intersections, making it easier to work with in theoretical frameworks.</p>
+<p>In the Alexandrov topology, for each element <span class="math notranslate nohighlight">\(x\)</span> in the space, the “upper set” containing all elements greater than or equal to <span class="math notranslate nohighlight">\(x\)</span> (according to the order relation) forms an open set.</p>
+<p class="rubric">Example</p>
+<p>Consider the set <span class="math notranslate nohighlight">\(\{a, b, c\}\)</span> with the following order relation:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a \leq b\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b \leq c\)</span></p></li>
+</ul>
+<p>The upper sets would be:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\{a, b, c\}\)</span> (starting from <span class="math notranslate nohighlight">\(a\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{b, c\}\)</span> (starting from <span class="math notranslate nohighlight">\(b\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{c\}\)</span> (starting from <span class="math notranslate nohighlight">\(c\)</span>)</p></li>
+</ul>
+<p>In this example, the open sets in the Alexandrov topology are arbitrary unions of these upper sets, along with the empty set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> (<em>set</em>) – The set on which the topology is defined.</p></li>
+<li><p><strong>order_relation</strong> (<em>Callable</em>) – A function that takes two elements <span class="math notranslate nohighlight">\(x, y\)</span> and returns True if <span class="math notranslate nohighlight">\(x \leq y\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Topology class representing the Alexandrov topology.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finite_topology.known_topologies.create_discrete_topology">
+<span class="sig-prename descclassname"><span class="pre">finite_topology.known_topologies.</span></span><span class="sig-name descname"><span class="pre">create_discrete_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.known_topologies.create_discrete_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a discrete topology on the given space.</p>
+<p>A <strong>discrete topology</strong> on a set <span class="math notranslate nohighlight">\(X\)</span> is the topology in which every subset of <span class="math notranslate nohighlight">\(X\)</span> is open. This means the topology <span class="math notranslate nohighlight">\(\tau\)</span> is equal to the power set of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tau = \mathcal{P}(X)\]</div>
+</div>
+<p class="rubric">Example</p>
+<p>A function from any space with a discrete topology to any topology is continuous.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>space</strong> (<em>set</em>) – The set on which the topology is defined.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Topology class representing the discrete topology.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finite_topology.known_topologies.create_divisibility_topology">
+<span class="sig-prename descclassname"><span class="pre">finite_topology.known_topologies.</span></span><span class="sig-name descname"><span class="pre">create_divisibility_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.known_topologies.create_divisibility_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an excluded point topology on the given space.</p>
+<p>An <strong>excluded point topology</strong> on a set <span class="math notranslate nohighlight">\(X\)</span> is defined such that the only open sets are those that do not contain a particular point <span class="math notranslate nohighlight">\(e \in X\)</span>, plus the entire set and the empty set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> (<em>set</em>) – The set on which the topology is defined.</p></li>
+<li><p><strong>excluded_point</strong> – The point that is excluded from all non-empty open sets.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Topology class representing the excluded point topology.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the excluded point is not an element of the space.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finite_topology.known_topologies.create_excluded_point_topology">
+<span class="sig-prename descclassname"><span class="pre">finite_topology.known_topologies.</span></span><span class="sig-name descname"><span class="pre">create_excluded_point_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excluded_point</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.known_topologies.create_excluded_point_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an excluded point topology on the given space.</p>
+<p>An <strong>excluded point topology</strong> on a set <span class="math notranslate nohighlight">\(X\)</span> is defined such that the only open sets are those that do not contain a particular point <span class="math notranslate nohighlight">\(e \in X\)</span>, plus the entire set and the empty set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> (<em>set</em>) – The set on which the topology is defined.</p></li>
+<li><p><strong>excluded_point</strong> – The point that is excluded from all non-empty open sets.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Topology class representing the excluded point topology.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the excluded point is not an element of the space.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finite_topology.known_topologies.create_particular_point_topology">
+<span class="sig-prename descclassname"><span class="pre">finite_topology.known_topologies.</span></span><span class="sig-name descname"><span class="pre">create_particular_point_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particular_point</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.known_topologies.create_particular_point_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a particular point topology on the given space.</p>
+<p>A <strong>particular point topology</strong> on a set <span class="math notranslate nohighlight">\(X\)</span> is defined such that every non-empty open set must include a distinguished point <span class="math notranslate nohighlight">\(p \in X\)</span>.</p>
+<p class="rubric">Example</p>
+<p>In a particular point topology, the only continuous functions are the constant ones or those mapping the distinguished point to any open set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> (<em>set</em>) – The set on which the topology is defined.</p></li>
+<li><p><strong>particular_point</strong> – The distinguished point that must be included in all non-empty open sets.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Topology class representing the particular point topology.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the particular point is not an element of the space.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finite_topology.known_topologies.create_sierpinski_topology">
+<span class="sig-prename descclassname"><span class="pre">finite_topology.known_topologies.</span></span><span class="sig-name descname"><span class="pre">create_sierpinski_topology</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.known_topologies.create_sierpinski_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the Sierpiński topology.</p>
+<p>The <strong>Sierpiński topology</strong> is defined on the set <span class="math notranslate nohighlight">\(\{0, 1\}\)</span> with the collection of open sets being <span class="math notranslate nohighlight">\(\{ \emptyset, \{1\}, \{0, 1\} \}\)</span>.</p>
+<p class="rubric">Example</p>
+<p>The Sierpiński topology is important in domain theory and theoretical computer science.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of the Topology class representing the Sierpiński topology.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finite_topology.known_topologies.create_topology_from_equivalence">
+<span class="sig-prename descclassname"><span class="pre">finite_topology.known_topologies.</span></span><span class="sig-name descname"><span class="pre">create_topology_from_equivalence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equivalence_relation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.known_topologies.create_topology_from_equivalence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a topology on the given space based on an equivalence relation.</p>
+<p>The open sets in this topology are defined as unions of equivalence classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> (<em>set</em>) – The set on which the topology is defined.</p></li>
+<li><p><strong>equivalence_relation</strong> (<em>function</em>) – A function that takes two elements and returns True if they are equivalent.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Topology class representing the topology based on the equivalence relation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finite_topology.known_topologies.create_trivial_topology">
+<span class="sig-prename descclassname"><span class="pre">finite_topology.known_topologies.</span></span><span class="sig-name descname"><span class="pre">create_trivial_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.known_topologies.create_trivial_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a trivial (indiscrete) topology on the given space.</p>
+<p>A <strong>trivial topology</strong> (also known as <strong>indiscrete topology</strong>) on a set <span class="math notranslate nohighlight">\(X\)</span> contains only the empty set and the entire set itself.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tau = \{ \emptyset, X \}\]</div>
+</div>
+<p class="rubric">Example</p>
+<p>A function to any space with the trivial topology is always continuous.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>space</strong> (<em>set</em>) – The set on which the topology is defined.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Topology class representing the trivial topology.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finite_topology.known_topologies.create_upward_closed_topology">
+<span class="sig-prename descclassname"><span class="pre">finite_topology.known_topologies.</span></span><span class="sig-name descname"><span class="pre">create_upward_closed_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_relation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.known_topologies.create_upward_closed_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a topology where open sets are upward-closed sets in a partial order.</p>
+<p>An <strong>upward-closed set</strong> (or <strong>upper set</strong>) contains, along with each of its elements, all elements greater than or equal to it in the given order.</p>
+<p>This type of topology is useful in order theory and domain theory, particularly in theoretical computer science and lattice theory.</p>
+<p class="rubric">Example</p>
+<p>Consider the set <span class="math notranslate nohighlight">\(\{1, 2, 3\}\)</span> with the usual ordering of integers. In this case, the upward-closed sets would be:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\emptyset\)</span> (the empty set),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{1, 2, 3\}\)</span> (the entire set),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{2, 3\}\)</span> (the set containing 2 and all elements greater than 2),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{3\}\)</span> (the set containing 3 alone).</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> (<em>set</em>) – The set on which the topology is defined.</p></li>
+<li><p><strong>order_relation</strong> (<em>dict</em>) – A mapping where <cite>order_relation[x]</cite> is a set of elements greater than or equal to <cite>x</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Topology class representing the upward-closed topology.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+        </article>
+        
+      </div>
+      <div class="min-w-0 max-w-6xl px-6 pb-6 xl:pt-6 xl:px-12">
+        <div class="navigation flex print:hidden">
+  <div class="navigation-prev">
+    <a href="functions.html">
+      <i class="i-icon chevron"></i>
+      <div class="page-info">
+        <span>Previous</span>
+        
+        <div class="title">Functions Module</div>
+        
+      </div>
+    </a>
+  </div>
+  
+</div>
+        
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, Nand0san</p>
+        
+        <p>
+          Made with
+          
+          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+          
+          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+        </p>
+      </div>
+      <div class="sy-foot-socials">
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+      <script src="_static/doctools.js"></script>
+      <script src="_static/sphinx_highlight.js"></script>
+      <script src="_static/shibuya.js?v=2023.6.8"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+</body>
+</html>

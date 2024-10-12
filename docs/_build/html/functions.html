@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Functions Module - Topology documentation</title>
+    <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Known Topologies Module" href="known_topologies.html" /><link rel="prev" title="Topology" href="topology.html" />
+  <script>
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="stylesheet" href="_static/pygments.css?v=2023.6.8" type="text/css" />
+    <link rel="stylesheet" href="_static/shibuya.css?v=2023.6.8" type="text/css" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=2023.6.8" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:4rem;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));
+  --sy-rc-theme:143, 118, 214;--sy-rc-bg:255, 255, 255;--sy-rc-invert:0, 0, 0;--sy-rc-text:0, 0, 0;--sy-c-bg:#fff;--sy-c-bg-weak:#f9f9f9;--sy-c-text:#374151;--sy-c-text-weak:#6b7280;--sy-c-heading:#111827;--sy-c-bold:#111827;--sy-c-foot-text:#232226;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#f0f0f0;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:143, 118, 214;--sy-rc-bg:255, 255, 255;--sy-rc-invert:0, 0, 0;--sy-rc-text:0, 0, 0;--sy-c-bg:#fff;--sy-c-bg-weak:#f9f9f9;--sy-c-text:#374151;--sy-c-text-weak:#6b7280;--sy-c-heading:#111827;--sy-c-bold:#111827;--sy-c-foot-text:#232226;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#f0f0f0;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:143, 118, 214;--sy-rc-bg:18, 18, 18;--sy-rc-invert:255, 255, 255;--sy-rc-text:255, 255, 255;--sy-c-bg:#121212;--sy-c-bg-weak:#212833;--sy-c-text:#cedbea;--sy-c-text-weak:#77889f;--sy-c-heading:#ebf0f4;--sy-c-bold:#ebf0f4;--sy-c-foot-text:#eee;--sy-c-foot-bg:#000;--sy-c-foot-divider:#000;
+  }
+}
+html.light {
+  --sy-rc-theme:143, 118, 214;--sy-rc-bg:255, 255, 255;--sy-rc-invert:0, 0, 0;--sy-rc-text:0, 0, 0;--sy-c-bg:#fff;--sy-c-bg-weak:#f9f9f9;--sy-c-text:#374151;--sy-c-text-weak:#6b7280;--sy-c-heading:#111827;--sy-c-bold:#111827;--sy-c-foot-text:#232226;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#f0f0f0;
+}
+html.dark {
+  --sy-rc-theme:143, 118, 214;--sy-rc-bg:18, 18, 18;--sy-rc-invert:255, 255, 255;--sy-rc-text:255, 255, 255;--sy-c-bg:#121212;--sy-c-bg-weak:#212833;--sy-c-text:#cedbea;--sy-c-text-weak:#77889f;--sy-c-heading:#ebf0f4;--sy-c-bold:#ebf0f4;--sy-c-foot-text:#eee;--sy-c-foot-bg:#000;--sy-c-foot-divider:#000;
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Functions Module"/>
+<meta name="twitter:card" content="summary"/></head>
+<body><div class="document"><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <div class="sy-head-links flex items-center">
+      <div class="md:hidden flex items-center">
+        <button class="hamburger js-menu mr-3" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </button>
+      </div>
+      <a class="sy-head-brand" href="index.html">
+        
+        
+        <strong>Topology</strong>
+      </a></div>
+    <div class="sy-head-actions flex gap-2 items-center print:hidden">
+      
+      <div class="hidden md:block"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form>
+      </div>
+      <button class="js-theme theme-switch flex items-center ml-1" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
+        <i class="i-icon theme-icon"></i>
+      </button>
+      
+        <button class="js-menu xl:hidden flex items-center ml-1" aria-label="Show table of contents" type="button" aria-controls="rside" aria-expanded="false">
+          <i class="i-icon outdent"></i>
+        </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-64 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-lside-top md:hidden pt-3 pb-3 px-6">
+        <div class="pt-3"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <button>Go</button>
+</form>
+        </div></div>
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc">
+          <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="topology.html">Topology</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Functions Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="known_topologies.html">Known Topologies Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-icon close"></i>
+    </button>
+    <div class="sy-scrollbar px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>Table of Contents</h3>
+    <ul>
+<li><a class="reference internal" href="#finite_topology.functions.Function"><code class="docutils literal notranslate"><span class="pre">Function</span></code></a><ul>
+<li><a class="reference internal" href="#finite_topology.functions.Function.get_preimage"><code class="docutils literal notranslate"><span class="pre">Function.get_preimage()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.functions.Function.is_bijective"><code class="docutils literal notranslate"><span class="pre">Function.is_bijective()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.functions.Function.is_continuous"><code class="docutils literal notranslate"><span class="pre">Function.is_continuous()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.functions.Function.is_homeomorphism"><code class="docutils literal notranslate"><span class="pre">Function.is_homeomorphism()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+
+  </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div>
+    </div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+    <div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-6 xl:px-12">
+        <article class="yue" role="main">
+          <section id="module-finite_topology.functions">
+<span id="functions-module"></span><h1>Functions Module<a class="headerlink" href="#module-finite_topology.functions" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="finite_topology.functions.Function">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finite_topology.functions.</span></span><span class="sig-name descname"><span class="pre">Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology"><span class="pre">Topology</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology"><span class="pre">Topology</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.functions.Function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a function between two topological spaces. It can be continuous or not.</p>
+<p>Attributes:
+- source (Topology): The topological space from which the function originates.
+- target (Topology): The topological space to which the function maps.
+- mapping (dict): A dictionary mapping elements from the source space to the target space.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.functions.Function.get_preimage">
+<span class="sig-name descname"><span class="pre">get_preimage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.get_preimage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtains the preimage (inverse image) of a given set in the target space.</p>
+<p>Parameters:
+- subset (set): A subset of the target space.</p>
+<p>Returns:
+set: The preimage of ‘subset’ in the source space.</p>
+<p class="rubric">Example</p>
+<p>Given a function mapping from the real numbers to the real numbers, the preimage of an interval can be computed as all points in the source that map into that interval.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.functions.Function.is_bijective">
+<span class="sig-name descname"><span class="pre">is_bijective</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.is_bijective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the function is bijective.</p>
+<p>A function is <strong>bijective</strong> if it is both injective (one-to-one) and surjective (onto). This means that every element in the target space is the image of exactly one element in the source space.</p>
+<p class="rubric">Example</p>
+<ul class="simple">
+<li><p>If the function maps each element uniquely (injective) and every element in the target is covered (surjective), the function is bijective.</p></li>
+<li><p>Bijective functions are invertible.</p></li>
+</ul>
+<p>Returns:
+bool: True if the function is bijective, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.functions.Function.is_continuous">
+<span class="sig-name descname"><span class="pre">is_continuous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.is_continuous" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the function is continuous.</p>
+<p>A function between two topological spaces is <strong>continuous</strong> if the preimage of every open set in the target space is open in the source space.</p>
+<p class="rubric">Example</p>
+<ul class="simple">
+<li><p>A function is always continuous if the target topology is trivial (indiscrete) because the only open sets are the empty set and the whole space.</p></li>
+<li><p>If the source topology is discrete, any function is continuous, as the preimage of any set is open.</p></li>
+</ul>
+<p>Returns:
+bool: True if the function is continuous, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.functions.Function.is_homeomorphism">
+<span class="sig-name descname"><span class="pre">is_homeomorphism</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.is_homeomorphism" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the function is a homeomorphism.</p>
+<p>A <strong>homeomorphism</strong> is a bijective continuous function whose inverse is also continuous. Homeomorphisms preserve the topological structure between spaces, making them topologically equivalent.</p>
+<p class="rubric">Example</p>
+<p>If the source and target spaces are identical topologically, the identity function is a homeomorphism.
+If a function is a homeomorphism, it means that both the function and its inverse are continuous.</p>
+<p>Returns:
+bool: True if the function is a homeomorphism, False otherwise.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+        
+      </div>
+      <div class="min-w-0 max-w-6xl px-6 pb-6 xl:pt-6 xl:px-12">
+        <div class="navigation flex print:hidden">
+  <div class="navigation-prev">
+    <a href="topology.html">
+      <i class="i-icon chevron"></i>
+      <div class="page-info">
+        <span>Previous</span>
+        
+        <div class="title">Topology</div>
+        
+      </div>
+    </a>
+  </div>
+  <div class="navigation-next">
+    <a href="known_topologies.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Known Topologies Module</div>
+      </div>
+      <i class="i-icon chevron"></i>
+    </a>
+  </div>
+</div>
+        
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, Nand0san</p>
+        
+        <p>
+          Made with
+          
+          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+          
+          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+        </p>
+      </div>
+      <div class="sy-foot-socials">
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+      <script src="_static/doctools.js"></script>
+      <script src="_static/sphinx_highlight.js"></script>
+      <script src="_static/shibuya.js?v=2023.6.8"></script>
+    
+</body>
+</html>

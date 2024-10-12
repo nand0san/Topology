@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Topology - Topology documentation</title>
+    <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Functions Module" href="functions.html" /><link rel="prev" title="Welcome to Topology’s documentation!" href="index.html" />
+  <script>
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="stylesheet" href="_static/pygments.css?v=2023.6.8" type="text/css" />
+    <link rel="stylesheet" href="_static/shibuya.css?v=2023.6.8" type="text/css" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=2023.6.8" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:4rem;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));
+  --sy-rc-theme:143, 118, 214;--sy-rc-bg:255, 255, 255;--sy-rc-invert:0, 0, 0;--sy-rc-text:0, 0, 0;--sy-c-bg:#fff;--sy-c-bg-weak:#f9f9f9;--sy-c-text:#374151;--sy-c-text-weak:#6b7280;--sy-c-heading:#111827;--sy-c-bold:#111827;--sy-c-foot-text:#232226;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#f0f0f0;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:143, 118, 214;--sy-rc-bg:255, 255, 255;--sy-rc-invert:0, 0, 0;--sy-rc-text:0, 0, 0;--sy-c-bg:#fff;--sy-c-bg-weak:#f9f9f9;--sy-c-text:#374151;--sy-c-text-weak:#6b7280;--sy-c-heading:#111827;--sy-c-bold:#111827;--sy-c-foot-text:#232226;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#f0f0f0;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:143, 118, 214;--sy-rc-bg:18, 18, 18;--sy-rc-invert:255, 255, 255;--sy-rc-text:255, 255, 255;--sy-c-bg:#121212;--sy-c-bg-weak:#212833;--sy-c-text:#cedbea;--sy-c-text-weak:#77889f;--sy-c-heading:#ebf0f4;--sy-c-bold:#ebf0f4;--sy-c-foot-text:#eee;--sy-c-foot-bg:#000;--sy-c-foot-divider:#000;
+  }
+}
+html.light {
+  --sy-rc-theme:143, 118, 214;--sy-rc-bg:255, 255, 255;--sy-rc-invert:0, 0, 0;--sy-rc-text:0, 0, 0;--sy-c-bg:#fff;--sy-c-bg-weak:#f9f9f9;--sy-c-text:#374151;--sy-c-text-weak:#6b7280;--sy-c-heading:#111827;--sy-c-bold:#111827;--sy-c-foot-text:#232226;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#f0f0f0;
+}
+html.dark {
+  --sy-rc-theme:143, 118, 214;--sy-rc-bg:18, 18, 18;--sy-rc-invert:255, 255, 255;--sy-rc-text:255, 255, 255;--sy-c-bg:#121212;--sy-c-bg-weak:#212833;--sy-c-text:#cedbea;--sy-c-text-weak:#77889f;--sy-c-heading:#ebf0f4;--sy-c-bold:#ebf0f4;--sy-c-foot-text:#eee;--sy-c-foot-bg:#000;--sy-c-foot-divider:#000;
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Topology"/>
+<meta name="twitter:card" content="summary"/></head>
+<body><div class="document"><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <div class="sy-head-links flex items-center">
+      <div class="md:hidden flex items-center">
+        <button class="hamburger js-menu mr-3" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </button>
+      </div>
+      <a class="sy-head-brand" href="index.html">
+        
+        
+        <strong>Topology</strong>
+      </a></div>
+    <div class="sy-head-actions flex gap-2 items-center print:hidden">
+      
+      <div class="hidden md:block"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form>
+      </div>
+      <button class="js-theme theme-switch flex items-center ml-1" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
+        <i class="i-icon theme-icon"></i>
+      </button>
+      
+        <button class="js-menu xl:hidden flex items-center ml-1" aria-label="Show table of contents" type="button" aria-controls="rside" aria-expanded="false">
+          <i class="i-icon outdent"></i>
+        </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-64 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-lside-top md:hidden pt-3 pb-3 px-6">
+        <div class="pt-3"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <button>Go</button>
+</form>
+        </div></div>
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc">
+          <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="known_topologies.html">Known Topologies Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-icon close"></i>
+    </button>
+    <div class="sy-scrollbar px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>Table of Contents</h3>
+    <ul>
+<li><a class="reference internal" href="#finite_topology.topology.Topology"><code class="docutils literal notranslate"><span class="pre">Topology</span></code></a><ul>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.add_set"><code class="docutils literal notranslate"><span class="pre">Topology.add_set()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.create_alexandrov_topology"><code class="docutils literal notranslate"><span class="pre">Topology.create_alexandrov_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.find_dense_subset"><code class="docutils literal notranslate"><span class="pre">Topology.find_dense_subset()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.get_basis"><code class="docutils literal notranslate"><span class="pre">Topology.get_basis()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.get_boundary"><code class="docutils literal notranslate"><span class="pre">Topology.get_boundary()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.get_closure"><code class="docutils literal notranslate"><span class="pre">Topology.get_closure()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.get_complement"><code class="docutils literal notranslate"><span class="pre">Topology.get_complement()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.get_exterior"><code class="docutils literal notranslate"><span class="pre">Topology.get_exterior()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.get_interior"><code class="docutils literal notranslate"><span class="pre">Topology.get_interior()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.get_ordered_subsets"><code class="docutils literal notranslate"><span class="pre">Topology.get_ordered_subsets()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.identify_topology"><code class="docutils literal notranslate"><span class="pre">Topology.identify_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_T0"><code class="docutils literal notranslate"><span class="pre">Topology.is_T0()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_T1"><code class="docutils literal notranslate"><span class="pre">Topology.is_T1()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_closed"><code class="docutils literal notranslate"><span class="pre">Topology.is_closed()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_compact"><code class="docutils literal notranslate"><span class="pre">Topology.is_compact()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_connected"><code class="docutils literal notranslate"><span class="pre">Topology.is_connected()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_discrete"><code class="docutils literal notranslate"><span class="pre">Topology.is_discrete()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_hausdorff"><code class="docutils literal notranslate"><span class="pre">Topology.is_hausdorff()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_open"><code class="docutils literal notranslate"><span class="pre">Topology.is_open()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_separable"><code class="docutils literal notranslate"><span class="pre">Topology.is_separable()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_structurally_equal"><code class="docutils literal notranslate"><span class="pre">Topology.is_structurally_equal()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_topology"><code class="docutils literal notranslate"><span class="pre">Topology.is_topology()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.known_topologies"><code class="docutils literal notranslate"><span class="pre">Topology.known_topologies</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+
+  </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div>
+    </div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+    <div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-6 xl:px-12">
+        <article class="yue" role="main">
+          <section id="topology">
+<h1>Topology<a class="headerlink" href="#topology" title="Permalink to this heading">¶</a></h1>
+<p><strong>Formal Definition</strong></p>
+<p>A <strong>topology</strong> on a set \(X\) is a collection \(\tau\) of subsets of \(X\) such that:</p>
+<ul class="simple">
+<li><p>The empty set and \(X\) itself are in \(\tau\).</p></li>
+<li><p>\(\tau\) is closed under arbitrary unions.</p></li>
+<li><p>\(\tau\) is closed under finite intersections.</p></li>
+</ul>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{A topology } \tau \text{ on a set } X \text{ satisfies:} \\
+\emptyset, X \in \tau, \\
+\forall \{ U_i \}_{i \in I} \subseteq \tau, \quad \bigcup_{i \in I} U_i \in \tau, \\
+\forall U_1, U_2, \dots, U_n \in \tau, \quad \bigcap_{j=1}^n U_j \in \tau\end{split}\]</div>
+</div>
+<p>This class allows working with finite topological spaces, defined by providing a space and a collection of subsets.</p>
+<span class="target" id="module-finite_topology.topology"></span><dl class="py class">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finite_topology.topology.</span></span><span class="sig-name descname"><span class="pre">Topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_of_subsets</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.topology.Topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a topology on a finite set.</p>
+<p>Class Attributes:
+- known_topologies (dict): Stores known topologies to facilitate identification.</p>
+<p>Instance Attributes:
+- space (set): The space on which the topology is defined.
+- collection_of_subsets (list): Collection of subsets that form the topology.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.add_set">
+<span class="sig-name descname"><span class="pre">add_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.add_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new set to the collection of subsets.</p>
+<p>Parameters:
+new_set (iterable): The new set to be added to the collection.</p>
+<p>Returns:
+bool: True if the new set is added successfully and the collection remains a topology, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.create_alexandrov_topology">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_alexandrov_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_relation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'function'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#finite_topology.topology.Topology" title="finite_topology.topology.Topology"><span class="pre">Topology</span></a></span></span><a class="headerlink" href="#finite_topology.topology.Topology.create_alexandrov_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the Alexandrov topology on the given space based on an order relation.</p>
+<p>The <strong>Alexandrov topology</strong> is a topology where every intersection of open sets is also open. It is commonly used in domain theory and theoretical computer science.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> (<em>set</em>) – The set on which the topology is defined.</p></li>
+<li><p><strong>order_relation</strong> (<em>function</em><em> or </em><em>dict</em>) – <ul>
+<li><p>If <cite>relation_type</cite> is ‘function’: A function that takes two elements <span class="math notranslate nohighlight">\(x, y\)</span> and returns True if <span class="math notranslate nohighlight">\(x \leq y\)</span>.</p></li>
+<li><p>If <cite>relation_type</cite> is ‘dict’: A dictionary where <span class="math notranslate nohighlight">\(\text{order_relation}[x]\)</span> is a set of elements greater than or equal to <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</p></li>
+<li><p><strong>relation_type</strong> (<em>str</em>) – Specifies the type of <cite>order_relation</cite> (‘function’ or ‘dict’).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Topology class representing the Alexandrov topology.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#finite_topology.topology.Topology" title="finite_topology.topology.Topology">Topology</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>If the space is <span class="math notranslate nohighlight">\(\{a, b, c\}\)</span> and the order relation is given by <span class="math notranslate nohighlight">\(a \leq b\)</span> and <span class="math notranslate nohighlight">\(b \leq c\)</span>, the Alexandrov topology will include sets that respect this order relation.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\forall x, y \in X, \quad U \cap V \in \tau \quad \text{for all } U, V \in \tau\]</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.find_dense_subset">
+<span class="sig-name descname"><span class="pre">find_dense_subset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.find_dense_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds and returns a dense subset of the topological space.</p>
+<p>A <strong>dense subset</strong> of a topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is a subset <span class="math notranslate nohighlight">\(A \subseteq X\)</span> such that the closure of <span class="math notranslate nohighlight">\(A\)</span> is equal to <span class="math notranslate nohighlight">\(X\)</span>.
+In other words, <span class="math notranslate nohighlight">\(A\)</span> is dense if every point in <span class="math notranslate nohighlight">\(X\)</span> is either in <span class="math notranslate nohighlight">\(A\)</span> or is a limit point of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[A \text{ is dense in } X \text{ if } \overline{A} = X\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dense subset if it exists, otherwise the entire space if it is the only dense subset (trivial case).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.get_basis">
+<span class="sig-name descname"><span class="pre">get_basis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.get_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes and returns a basis for the topology.</p>
+<p>A <strong>basis</strong> for a topology <span class="math notranslate nohighlight">\(\tau\)</span> on a set <span class="math notranslate nohighlight">\(X\)</span> is a collection of open sets <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> such that every open set in <span class="math notranslate nohighlight">\(\tau\)</span> can be written as a union of sets in <span class="math notranslate nohighlight">\(\mathcal{B}\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\forall U \in \tau, \quad \exists \{ B_i \}_{i \in I} \subseteq \mathcal{B}, \quad U = \bigcup_{i \in I} B_i\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of sets representing the basis of the topology.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[set]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.get_boundary">
+<span class="sig-name descname"><span class="pre">get_boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.get_boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtains the boundary of a given set in the topological space.</p>
+<p>The <strong>boundary</strong> of a set <span class="math notranslate nohighlight">\(A\)</span> in a topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is defined as the difference between the closure and the interior of <span class="math notranslate nohighlight">\(A\)</span>. Formally:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\partial A = \overline{A} \setminus \text{Interior}(A)\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subset</strong> (<em>set</em>) – The set for which the boundary is to be obtained.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The boundary of the set.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.get_closure">
+<span class="sig-name descname"><span class="pre">get_closure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.get_closure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtains the exterior of a given set in the topological space.</p>
+<p>The <strong>exterior</strong> of a set <span class="math notranslate nohighlight">\(A\)</span> in a topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is defined as the interior of its complement.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Exterior}(A) = \text{Interior}(X \setminus A)\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subset</strong> (<em>set</em>) – The set for which the exterior is to be obtained.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The exterior of the set.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.get_complement">
+<span class="sig-name descname"><span class="pre">get_complement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.get_complement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the complement of the given subset in the topological space.</p>
+<p>The <strong>complement</strong> of a set (A) in a topological space (X) is the set of elements in (X) that are not in (A).</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Complement}(A) = X \setminus A\]</div>
+</div>
+<p>Parameters:
+subset (set): The subset for which the complement is to be obtained.</p>
+<p>Returns:
+set: The complement of the subset in the topological space.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.get_exterior">
+<span class="sig-name descname"><span class="pre">get_exterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.get_exterior" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtains the exterior of a given set in the topological space.</p>
+<p>The <strong>exterior</strong> of a set <span class="math notranslate nohighlight">\(A\)</span> in a topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is defined as the interior of its complement.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Exterior}(A) = \text{Interior}(X \setminus A)\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subset</strong> (<em>set</em>) – The set for which the exterior is to be obtained.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The exterior of the set.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.get_interior">
+<span class="sig-name descname"><span class="pre">get_interior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.get_interior" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtains the interior of a given set in the topological space.</p>
+<p>The <strong>interior</strong> of a set <span class="math notranslate nohighlight">\(A\)</span> in a topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is the largest open set contained within <span class="math notranslate nohighlight">\(A\)</span>. Formally:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{Interior}(A) = \bigcup \{ U \in \tau : U \subseteq A \}\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subset</strong> (<em>set</em>) – The set for which the interior is to be obtained.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The interior of the set.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.get_ordered_subsets">
+<span class="sig-name descname"><span class="pre">get_ordered_subsets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.get_ordered_subsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the collection of subsets aesthetically ordered.</p>
+<p>Returns:
+List[Set]: List of subsets ordered by the specified criterion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.identify_topology">
+<span class="sig-name descname"><span class="pre">identify_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">known_topologies</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.identify_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifies the topology by comparing it to a list of known topologies.</p>
+<p>Parameters:
+known_topologies (dict): A dictionary with names as keys and Topology objects as values.</p>
+<p>Returns:
+list: Names of known topologies that are homeomorphic to this topology.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_T0">
+<span class="sig-name descname"><span class="pre">is_T0</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_T0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the topological space is T0.</p>
+<p>In a T0 space (Kolmogorov space), for every pair of distinct points, there exists an open set containing one of the points but not the other.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\forall x, y \in X, \quad x \neq y \implies \exists U \in \tau, \quad (x \in U \wedge y \notin U) \text{ or } (y \in U \wedge x \notin U)\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the space is T0, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_T1">
+<span class="sig-name descname"><span class="pre">is_T1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_T1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the topological space is T1.</p>
+<p>A topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is <strong>T1</strong> if, for every pair of distinct points,
+each has a neighborhood that does not contain the other.</p>
+<p>Additionally, in a T1 space, every single point must be closed, meaning
+its complement is an open set.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\forall x, y \in X, \quad x \neq y \implies \exists U, V \in \tau, \quad
+(x \in U \wedge y \notin U) \wedge (y \in V \wedge x \notin V)\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the space is T1, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_closed">
+<span class="sig-name descname"><span class="pre">is_closed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_closed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the given subset is closed in the topological space.</p>
+<p>A set is <strong>closed</strong> if its complement is open.</p>
+<p>Parameters:
+subset (set): The set to be checked.</p>
+<p>Returns:
+bool: True if the subset is closed, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_compact">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_compact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_compact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the topological space is compact.</p>
+<p>A topological space is <strong>compact</strong> if every open cover has a finite subcover.
+Formally, given an open cover of the space, which is a collection of open sets whose union contains the entire space,
+there exists a finite subcollection that also covers the entire space.</p>
+<p>Definitions:</p>
+<ul>
+<li><p><strong>Open Cover</strong>: An open cover of a set <span class="math notranslate nohighlight">\(X\)</span> in a topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is a collection of open sets <span class="math notranslate nohighlight">\(\{U_i\}_{i \in I}\)</span> such that the union of all <span class="math notranslate nohighlight">\(U_i\)</span> contains the set <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[X \subseteq \bigcup_{i \in I} U_i\]</div>
+</div>
+</li>
+<li><p><strong>Subcover</strong>: A subcover is a subcollection of the open cover that still covers the set <span class="math notranslate nohighlight">\(X\)</span>. In other words, if <span class="math notranslate nohighlight">\(\{U_i\}_{i \in I}\)</span> is an open cover of <span class="math notranslate nohighlight">\(X\)</span>, a <strong>subcover</strong> is a subcollection <span class="math notranslate nohighlight">\(\{U_j\}_{j \in J}\)</span>, where <span class="math notranslate nohighlight">\(J \subseteq I\)</span>, such that:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[X \subseteq \bigcup_{j \in J} U_j\]</div>
+</div>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the space is compact, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_connected">
+<span class="sig-name descname"><span class="pre">is_connected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_connected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the topological space is connected.</p>
+<p>A topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is <strong>connected</strong> if it cannot be represented as the union of two disjoint non-empty open sets.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\text{A space is connected if } \nexists U, V \in \tau, \quad U \cap V = \emptyset, \; U \cup V = X, \; U \neq \emptyset, \; V \neq \emptyset\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the space is connected, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_discrete">
+<span class="sig-name descname"><span class="pre">is_discrete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_discrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the topology is discrete.</p>
+<p>A <strong>discrete topology</strong> on a set <span class="math notranslate nohighlight">\(X\)</span> is the topology in which every subset of <span class="math notranslate nohighlight">\(X\)</span> is open.
+This means the topology <span class="math notranslate nohighlight">\(\tau\)</span> is equal to the power set of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\tau = \mathcal{P}(X)\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the topology is discrete, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_hausdorff">
+<span class="sig-name descname"><span class="pre">is_hausdorff</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_hausdorff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the topological space is Hausdorff (T2).</p>
+<p>A topological space <span class="math notranslate nohighlight">\((X, \tau)\)</span> is <strong>Hausdorff</strong> if, for any two distinct points, there exist disjoint open sets containing each of the points.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\forall x, y \in X, \quad x \neq y \implies \exists U, V \in \tau, \quad x \in U, \quad y \in V, \quad U \cap V = \emptyset\]</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the space is Hausdorff, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_open">
+<span class="sig-name descname"><span class="pre">is_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the given subset is open in the topological space.</p>
+<p>Parameters:
+subset (set): The set to be checked.</p>
+<p>Returns:
+bool: True if the subset is open, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_separable">
+<span class="sig-name descname"><span class="pre">is_separable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_separable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the topological space is separable.</p>
+<p>A <strong>separable space</strong> is one that contains a countable, dense subset.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In finite topological spaces, any non-empty subset can be considered dense if its closure is the entire space.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the space is separable, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_structurally_equal">
+<span class="sig-name descname"><span class="pre">is_structurally_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#finite_topology.topology.Topology" title="finite_topology.topology.Topology"><span class="pre">Topology</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_structurally_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if two topologies have the same structure, regardless of the elements.</p>
+<p>Parameters:
+other (Topology): Another topology to compare.</p>
+<p>Returns:
+bool: True if the topologies have the same structure, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_topology">
+<span class="sig-name descname"><span class="pre">is_topology</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.topology.Topology.is_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the collection of subsets forms a topology on the given space.</p>
+<p>Returns:
+bool: True if the collection is a topology, False otherwise.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.known_topologies">
+<span class="sig-name descname"><span class="pre">known_topologies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#finite_topology.topology.Topology.known_topologies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+        
+      </div>
+      <div class="min-w-0 max-w-6xl px-6 pb-6 xl:pt-6 xl:px-12">
+        <div class="navigation flex print:hidden">
+  <div class="navigation-prev">
+    <a href="index.html">
+      <i class="i-icon chevron"></i>
+      <div class="page-info">
+        <span>Previous</span>
+        
+        <div class="title">Home</div>
+        
+      </div>
+    </a>
+  </div>
+  <div class="navigation-next">
+    <a href="functions.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Functions Module</div>
+      </div>
+      <i class="i-icon chevron"></i>
+    </a>
+  </div>
+</div>
+        
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, Nand0san</p>
+        
+        <p>
+          Made with
+          
+          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+          
+          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+        </p>
+      </div>
+      <div class="sy-foot-socials">
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+      <script src="_static/doctools.js"></script>
+      <script src="_static/sphinx_highlight.js"></script>
+      <script src="_static/shibuya.js?v=2023.6.8"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+</body>
+</html>
