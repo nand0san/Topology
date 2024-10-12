@@ -12,11 +12,12 @@ language = 'en'
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-html_static_path = ['_static']
+# html_static_path = ['_static']  # not use of CSS
 
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon',  # Soporte para Google y NumPy docstrings
+    'sphinx.ext.napoleon',
+    'sphinx.ext.mathjax',  # Habilitar el soporte de MathJax
 ]
 
 html_theme = 'shibuya'

@@ -1,3 +1,4 @@
+from typing import Union, Callable
 from itertools import permutations, combinations, chain
 
 
@@ -85,6 +86,7 @@ class Topology:
 
         if new_set not in self.collection_of_subsets:
             self.collection_of_subsets.append(new_set)
+            # TODO: pintar si es cerrado el conjunto añadido, claramente abierto sería pq lo hemos añadido luego sería abiertocerrado o solo abierto.
             print(f"Added the set {new_set} to the collection.")
         else:
             print(f"The set {new_set} is already in the collection.")
@@ -218,7 +220,7 @@ class Topology:
         """
         Computes and returns a basis for the topology.
 
-        A **basis** for a topology \\(\\tau\\) on a set \\(X\\) is a collection of open sets \\(\\mathcal{B}\\) such that every open set in \\(\\tau\\) can be written as a union of sets in \\(\\mathcal{B}\\).
+        A **basis** for a topology :math:`\\tau` on a set :math:`X` is a collection of open sets :math:`\\mathcal{B}` such that every open set in :math:`\\tau` can be written as a union of sets in :math:`\\mathcal{B}`.
 
         .. math::
 
@@ -254,7 +256,8 @@ class Topology:
         """
         Checks if the topology is discrete.
 
-        A **discrete topology** on a set \\(X\\) is the topology in which every subset of \\(X\\) is open. This means the topology \\(\\tau\\) is equal to the power set of \\(X\\).
+        A **discrete topology** on a set :math:`X` is the topology in which every subset of :math:`X` is open.
+        This means the topology :math:`\\tau` is equal to the power set of :math:`X`.
 
         .. math::
 
@@ -281,7 +284,7 @@ class Topology:
         """
         Checks if the topological space is connected.
 
-        A topological space \\((X, \\tau)\\) is **connected** if it cannot be represented as the union of two disjoint non-empty open sets.
+        A topological space :math:`(X, \\tau)` is **connected** if it cannot be represented as the union of two disjoint non-empty open sets.
 
         .. math::
 
@@ -323,21 +326,17 @@ class Topology:
 
         Definitions:
 
-        - **Open Cover**: An open cover of a set \\( X \\) in a topological space \\((X, \\tau)\\) is a collection of open sets \\(\\{U_i\\}_{i \\in I}\\)
-          such that the union of all \\(U_i\\) contains the set \\(X\\):
+        - **Open Cover**: An open cover of a set :math:`X` in a topological space :math:`(X, \\tau)` is a collection of open sets :math:`\\{U_i\\}_{i \\in I}` such that the union of all :math:`U_i` contains the set :math:`X`:
 
-          \\[
-          X \\subseteq \\bigcup_{i \\in I} U_i
-          \\]
+          .. math::
 
-        - **Subcover**: A subcover is a subcollection of the open cover that still covers the set \\( X \\). In other words, if \\(\\{U_i\\}_{i \\in I}\\)
-          is an open cover of \\(X\\), a **subcover** is a subcollection \\(\\{U_j\\}_{j \\in J}\\), where \\(J \\subseteq I\\), such that:
+            X \\subseteq \\bigcup_{i \\in I} U_i
 
-          \\[
-          X \\subseteq \\bigcup_{j \\in J} U_j
-          \\]
+        - **Subcover**: A subcover is a subcollection of the open cover that still covers the set :math:`X`. In other words, if :math:`\\{U_i\\}_{i \\in I}` is an open cover of :math:`X`, a **subcover** is a subcollection :math:`\\{U_j\\}_{j \\in J}`, where :math:`J \\subseteq I`, such that:
 
-        In the case of finite spaces, every topological space is compact because we can always trivially find a finite subcover for any given open cover.
+          .. math::
+
+            X \\subseteq \\bigcup_{j \\in J} U_j
 
         Returns:
             bool: True if the space is compact, False otherwise.
@@ -349,7 +348,7 @@ class Topology:
         """
         Finds and returns a dense subset of the topological space.
 
-        A **dense subset** of a topological space \((X, \tau)\) is a subset \(A \subseteq X\) such that the closure of \(A\) is equal to \(X\). In other words, \(A\) is dense if every point in \(X\) is either in \(A\) or is a limit point of \(A\).
+        A **dense subset** of a topological space :math:`(X, \\tau)` is a subset :math:`A \\subseteq X` such that the closure of :math:`A` is equal to :math:`X`. In other words, :math:`A` is dense if every point in :math:`X` is either in :math:`A` or is a limit point of :math:`A`.
 
         .. math::
 
@@ -367,7 +366,10 @@ class Topology:
         return set()
 
     @staticmethod
-    def create_alexandrov_topology(space, order_relation, relation_type='function'):
+    def create_alexandrov_topology(space: set,
+                                   order_relation: Union[Callable[[int, int], bool], dict],
+                                   # La función toma dos enteros y retorna un booleano
+                                   relation_type: str = 'function') -> 'Topology':
         """
         Creates the Alexandrov topology on the given space based on an order relation.
 
@@ -376,8 +378,8 @@ class Topology:
         Parameters:
             space (set): The set on which the topology is defined.
             order_relation (function or dict):
-                - If `relation_type` is 'function': A function that takes two elements \(x, y\) and returns True if \(x \leq y\).
-                - If `relation_type` is 'dict': A dictionary where \(\text{order_relation}[x]\) is a set of elements greater than or equal to \(x\).
+                - If `relation_type` is 'function': A function that takes two elements :math:`x, y` and returns True if :math:`x \\leq y`.
+                - If `relation_type` is 'dict': A dictionary where :math:`\\text{order_relation}[x]` is a set of elements greater than or equal to :math:`x`.
 
             relation_type (str): Specifies the type of `order_relation` ('function' or 'dict').
 
@@ -385,12 +387,11 @@ class Topology:
             Topology: An instance of the Topology class representing the Alexandrov topology.
 
         Example:
-            If the space is \(\{a, b, c\}\) and the order relation is given by \(a \leq b\) and \(b \leq c\), the Alexandrov topology will include sets that respect this order relation.
+            If the space is :math:`\\{a, b, c\\}` and the order relation is given by :math:`a \\leq b` and :math:`b \\leq c`, the Alexandrov topology will include sets that respect this order relation.
 
         .. math::
 
             \\forall x, y \\in X, \\quad U \\cap V \\in \\tau \\quad \\text{for all } U, V \\in \\tau
-
         """
         if relation_type == 'function':
             # Generate upper sets using the relation function
@@ -448,16 +449,19 @@ class Topology:
 
     def get_closure(self, subset: set) -> set:
         """
-        Obtains the closure of a given set in the topological space.
+        Obtains the exterior of a given set in the topological space.
 
-        The **closure** of a set \\(A\\) in a topological space \\((X, \\tau)\\) is the smallest closed set that contains \\(A\\). Formally:
+        The **exterior** of a set :math:`A` in a topological space :math:`(X, \\tau)` is defined as the interior of its complement.
 
         .. math::
 
-            \\text{closure}(A) = \\bigcap \\{ F \\in \\text{Closed sets of } X : A \\subseteq F \\}
+            \\text{Exterior}(A) = \\text{Interior}(X \\setminus A)
+
+        Parameters:
+            subset (set): The set for which the exterior is to be obtained.
 
         Returns:
-            set: The closure of the given set.
+            set: The exterior of the set.
         """
         # Define closed sets as complements of open sets
         closed_sets = [self.space - open_set for open_set in self.collection_of_subsets]
@@ -476,11 +480,11 @@ class Topology:
         """
         Checks if the topological space is Hausdorff (T2).
 
-        A topological space \\((X, \\tau)\\) is **Hausdorff** if, for any two distinct points, there exist disjoint open sets containing each of the points.
+        A topological space :math:`(X, \\tau)` is **Hausdorff** if, for any two distinct points, there exist disjoint open sets containing each of the points.
 
         .. math::
 
-            \\forall x, y \\in X, \\; x \\neq y \\implies \\exists U, V \\in \\tau, \\; x \\in U, \\; y \\in V, \\; U \\cap V = \\emptyset
+            \\forall x, y \\in X, \\quad x \\neq y \\implies \\exists U, V \\in \\tau, \\quad x \\in U, \\quad y \\in V, \\quad U \\cap V = \\emptyset
 
         Returns:
             bool: True if the space is Hausdorff, False otherwise.
@@ -506,7 +510,7 @@ class Topology:
         """
         Obtains the interior of a given set in the topological space.
 
-        The **interior** of a set \(A\) in a topological space \((X, \tau)\) is the largest open set contained within \(A\). Formally:
+        The **interior** of a set :math:`A` in a topological space :math:`(X, \\tau)` is the largest open set contained within :math:`A`. Formally:
 
         .. math::
 
@@ -528,7 +532,7 @@ class Topology:
         """
         Obtains the boundary of a given set in the topological space.
 
-        The **boundary** of a set \(A\) in a topological space \((X, \tau)\) is defined as the difference between the closure and the interior of \(A\). Formally:
+        The **boundary** of a set :math:`A` in a topological space :math:`(X, \\tau)` is defined as the difference between the closure and the interior of :math:`A`. Formally:
 
         .. math::
 
@@ -549,7 +553,7 @@ class Topology:
         """
         Obtains the exterior of a given set in the topological space.
 
-        The **exterior** of a set \\(A\\) in a topological space \\((X, \\tau)\\) is defined as the interior of its complement.
+        The **exterior** of a set :math:`A` in a topological space :math:`(X, \\tau)` is defined as the interior of its complement.
 
         .. math::
 
@@ -573,7 +577,7 @@ class Topology:
 
         .. math::
 
-            \\forall x, y \\in X, \\; x \\neq y \\implies \\exists U \\in \\tau, \\; (x \\in U \\wedge y \\notin U) \\text{ or } (y \\in U \\wedge x \\notin U)
+            \\forall x, y \\in X, \\quad x \\neq y \\implies \\exists U \\in \\tau, \\quad (x \\in U \\wedge y \\notin U) \\text{ or } (y \\in U \\wedge x \\notin U)
 
         Returns:
             bool: True if the space is T0, False otherwise.
@@ -593,22 +597,29 @@ class Topology:
         """
         Checks if the topological space is T1.
 
-        A topological space \((X, \tau)\) is **T1** if, for every pair of distinct points, each has a neighborhood that does not contain the other.
+        A topological space :math:`(X, \\tau)` is **T1** if, for every pair of distinct points,
+        each has a neighborhood that does not contain the other.
+
+        Additionally, in a T1 space, every single point must be closed, meaning
+        its complement is an open set.
 
         .. math::
 
-            \\forall x, y \\in X, \\; x \\neq y \\implies \\exists U, V \\in \\tau, \\; (x \\in U \\wedge y \\notin U) \\wedge (y \\in V \\wedge x \\notin V)
+            \\forall x, y \\in X, \\quad x \\neq y \\implies \\exists U, V \\in \\tau, \\quad
+            (x \\in U \\wedge y \\notin U) \\wedge (y \\in V \\wedge x \\notin V)
 
         Returns:
             bool: True if the space is T1, False otherwise.
         """
-        # Iterate over all pairs of distinct points
-        for x, y in combinations(self.space, 2):
-            # Check if x can be separated from y and vice versa
-            x_separates = any(x in U and y not in U for U in self.collection_of_subsets)
-            y_separates = any(y in U and x not in U for U in self.collection_of_subsets)
+        # Iterate over all points in the space
+        for point in self.space:
+            # Calculate the complement of the current point
+            complement = self.space - {point}
 
-            if not (x_separates and y_separates):
-                print(f"Cannot mutually separate {x} and {y} in a T1 space.")
+            # Check if the complement is an open set
+            if complement not in self.collection_of_subsets:
+                print(f"Point {point} is not closed, complement {complement} is not open.")
                 return False
+
+        # If all points are closed (i.e., their complements are open), the space is T1
         return True
