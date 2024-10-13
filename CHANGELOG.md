@@ -3,6 +3,11 @@
 
 All significant updates to this project are tracked here.
 
+- Version 0.1.10 - 2024-10-13
+  - Method to evaluate open mapping in Function.
+  - Method to evaluate indiscrete topology in Topology.
+  - Better "__repr__" methods in FUnction and Topology.
+
 - Version 0.1.9 - 2024-10-12
   - **File Cleanup**: Removed outdated files to streamline the codebase.
   - **Docstring Enhancements**: Fixed LaTeX syntax within docstrings for better documentation generation and clarity.

@@ -128,21 +128,44 @@ class Topology:
 
     def __repr__(self) -> str:
         """
-        Returns a string representation of the Topology instance.
-
-        Returns:
-        str: String representation of the topology.
+        Returns a string representation of the Topology instance, including its properties.
         """
         id_str = "Topology" if self.is_topology() else "Set"
         ordered_subsets = self.get_ordered_subsets()
 
-        # Build the string representation
+        # Build the string representation of the subsets
         subsets_str = "\n    ".join(str(sorted(s)) for s in ordered_subsets)
+
+        # Check properties
+        properties = []
+
+        if self.is_discrete():
+            properties.append("Discrete")
+        if self.is_indiscrete():
+            properties.append("Indiscrete")
+        if self.is_T0():
+            properties.append("T0")
+        if self.is_T1():
+            properties.append("T1")
+        if self.is_hausdorff():
+            properties.append("T2 (Hausdorff)")
+        if self.is_connected():
+            properties.append("Connected")
+        else:
+            properties.append("Not Connected")
+        if self.is_compact():
+            properties.append("Compact")
+        if self.is_separable():
+            properties.append("Separable")
+
+        # Build properties string
+        properties_str = ', '.join(properties) if properties else 'None'
 
         return (f"{id_str}(\n"
                 f"  Space: {sorted(self.space)},\n"
                 f"  Collection of Subsets:\n"
-                f"    {subsets_str}\n)")
+                f"    {subsets_str}\n"
+                f"  Properties: {properties_str}\n)")
 
     def __len__(self) -> int:
         """
@@ -282,6 +305,20 @@ class Topology:
 
         # Check if the collection of subsets matches the power set
         return topology_set == power_set
+
+    def is_indiscrete(self):
+        """
+        Checks if the topology is indiscrete.
+
+        An **indiscrete topology** on a set :math:`X` is the topology in which the unique open not empty subset is :math:`X`.
+
+        Returns:
+            bool: True if the topology is indiscrete, False otherwise.
+        """
+        if len(self.collection_of_subsets) == 2 and set() in self.collection_of_subsets and self.space in self.collection_of_subsets:
+            return True
+        else:
+            return False
 
     def is_connected(self) -> bool:
         """
