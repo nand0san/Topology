@@ -112,10 +112,14 @@ html.dark {
     <h3>Table of Contents</h3>
     <ul>
 <li><a class="reference internal" href="#finite_topology.functions.Function"><code class="docutils literal notranslate"><span class="pre">Function</span></code></a><ul>
+<li><a class="reference internal" href="#finite_topology.functions.Function.get_image"><code class="docutils literal notranslate"><span class="pre">Function.get_image()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.functions.Function.get_preimage"><code class="docutils literal notranslate"><span class="pre">Function.get_preimage()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.functions.Function.is_bijective"><code class="docutils literal notranslate"><span class="pre">Function.is_bijective()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.functions.Function.is_continuous"><code class="docutils literal notranslate"><span class="pre">Function.is_continuous()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.functions.Function.is_homeomorphism"><code class="docutils literal notranslate"><span class="pre">Function.is_homeomorphism()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.functions.Function.is_injective"><code class="docutils literal notranslate"><span class="pre">Function.is_injective()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.functions.Function.is_open_mapping"><code class="docutils literal notranslate"><span class="pre">Function.is_open_mapping()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.functions.Function.is_surjective"><code class="docutils literal notranslate"><span class="pre">Function.is_surjective()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -135,61 +139,57 @@ html.dark {
 <dt class="sig sig-object py" id="finite_topology.functions.Function">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finite_topology.functions.</span></span><span class="sig-name descname"><span class="pre">Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology"><span class="pre">Topology</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="topology.html#finite_topology.topology.Topology" title="finite_topology.topology.Topology"><span class="pre">Topology</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.functions.Function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Represents a function between two topological spaces. It can be continuous or not.</p>
+<p>Represents a function between two topological spaces. It can be continuous, open, etc.</p>
 <p>Attributes:
 - source (Topology): The topological space from which the function originates.
 - target (Topology): The topological space to which the function maps.
 - mapping (dict): A dictionary mapping elements from the source space to the target space.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.functions.Function.get_image">
+<span class="sig-name descname"><span class="pre">get_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.get_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtains the image of a given set in the source space.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="finite_topology.functions.Function.get_preimage">
 <span class="sig-name descname"><span class="pre">get_preimage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.get_preimage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtains the preimage (inverse image) of a given set in the target space.</p>
-<p>Parameters:
-- subset (set): A subset of the target space.</p>
-<p>Returns:
-set: The preimage of ‘subset’ in the source space.</p>
-<p class="rubric">Example</p>
-<p>Given a function mapping from the real numbers to the real numbers, the preimage of an interval can be computed as all points in the source that map into that interval.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="finite_topology.functions.Function.is_bijective">
 <span class="sig-name descname"><span class="pre">is_bijective</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.is_bijective" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the function is bijective.</p>
-<p>A function is <strong>bijective</strong> if it is both injective (one-to-one) and surjective (onto). This means that every element in the target space is the image of exactly one element in the source space.</p>
-<p class="rubric">Example</p>
-<ul class="simple">
-<li><p>If the function maps each element uniquely (injective) and every element in the target is covered (surjective), the function is bijective.</p></li>
-<li><p>Bijective functions are invertible.</p></li>
-</ul>
-<p>Returns:
-bool: True if the function is bijective, False otherwise.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="finite_topology.functions.Function.is_continuous">
 <span class="sig-name descname"><span class="pre">is_continuous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.is_continuous" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the function is continuous.</p>
-<p>A function between two topological spaces is <strong>continuous</strong> if the preimage of every open set in the target space is open in the source space.</p>
-<p class="rubric">Example</p>
-<ul class="simple">
-<li><p>A function is always continuous if the target topology is trivial (indiscrete) because the only open sets are the empty set and the whole space.</p></li>
-<li><p>If the source topology is discrete, any function is continuous, as the preimage of any set is open.</p></li>
-</ul>
-<p>Returns:
-bool: True if the function is continuous, False otherwise.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="finite_topology.functions.Function.is_homeomorphism">
 <span class="sig-name descname"><span class="pre">is_homeomorphism</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.is_homeomorphism" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the function is a homeomorphism.</p>
-<p>A <strong>homeomorphism</strong> is a bijective continuous function whose inverse is also continuous. Homeomorphisms preserve the topological structure between spaces, making them topologically equivalent.</p>
-<p class="rubric">Example</p>
-<p>If the source and target spaces are identical topologically, the identity function is a homeomorphism.
-If a function is a homeomorphism, it means that both the function and its inverse are continuous.</p>
-<p>Returns:
-bool: True if the function is a homeomorphism, False otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.functions.Function.is_injective">
+<span class="sig-name descname"><span class="pre">is_injective</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.is_injective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the function is injective (one-to-one).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.functions.Function.is_open_mapping">
+<span class="sig-name descname"><span class="pre">is_open_mapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.is_open_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the function is an open mapping.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.functions.Function.is_surjective">
+<span class="sig-name descname"><span class="pre">is_surjective</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#finite_topology.functions.Function.is_surjective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the function is surjective (onto).</p>
 </dd></dl>
 
 </dd></dl>

@@ -130,6 +130,7 @@ html.dark {
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_connected"><code class="docutils literal notranslate"><span class="pre">Topology.is_connected()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_discrete"><code class="docutils literal notranslate"><span class="pre">Topology.is_discrete()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_hausdorff"><code class="docutils literal notranslate"><span class="pre">Topology.is_hausdorff()</span></code></a></li>
+<li><a class="reference internal" href="#finite_topology.topology.Topology.is_indiscrete"><code class="docutils literal notranslate"><span class="pre">Topology.is_indiscrete()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_open"><code class="docutils literal notranslate"><span class="pre">Topology.is_open()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_separable"><code class="docutils literal notranslate"><span class="pre">Topology.is_separable()</span></code></a></li>
 <li><a class="reference internal" href="#finite_topology.topology.Topology.is_structurally_equal"><code class="docutils literal notranslate"><span class="pre">Topology.is_structurally_equal()</span></code></a></li>
@@ -513,6 +514,21 @@ This means the topology <span class="math notranslate nohighlight">\(\tau\)</spa
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if the space is Hausdorff, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="finite_topology.topology.Topology.is_indiscrete">
+<span class="sig-name descname"><span class="pre">is_indiscrete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#finite_topology.topology.Topology.is_indiscrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the topology is indiscrete.</p>
+<p>An <strong>indiscrete topology</strong> on a set <span class="math notranslate nohighlight">\(X\)</span> is the topology in which the unique open not empty subset is <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the topology is indiscrete, False otherwise.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
