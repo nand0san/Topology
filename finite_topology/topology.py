@@ -130,12 +130,16 @@ class Topology:
         """
         Returns a string representation of the Topology instance, including its properties.
         """
-        id_str = "Topology" if self.is_topology() else "Set"
+        is_topology = self.is_topology()
+        id_str = "Topology" if is_topology else "Set"
         ordered_subsets = self.get_ordered_subsets()
 
         # Build the string representation of the subsets
         subsets_str = "\n    ".join(str(sorted(s)) for s in ordered_subsets)
 
+        if not is_topology:
+            return (f"  Collection of Subsets:\n"
+                    f"    {subsets_str}\n")
         # Check properties
         properties = []
 
