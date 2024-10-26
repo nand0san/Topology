@@ -101,5 +101,5 @@ old/
 !ejemplo.md
 !CHANGELOG.md
 *.pdf
-deploy.bat
+deploy.sh
 borrar*
