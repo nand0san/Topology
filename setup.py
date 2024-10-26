@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='finite-topology',
-    version='0.1.10',
+    version='0.1.11',
     author='nand0san',
     author_email='hancaidolosdos@hotmail.com',
     description='A Python library for defining and manipulating topologies on finite sets.',
