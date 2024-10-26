@@ -1,4 +1,5 @@
-.. Topology documentation master file
+.. Topology documentation master file, created by
+   sphinx-quickstart on Tue Oct 24 2024.
 
 Welcome to Topology's documentation!
 ====================================
@@ -7,9 +8,9 @@ Welcome to Topology's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   topology
    functions
    known_topologies
+   topology
 
 Indices and tables
 ==================
