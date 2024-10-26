@@ -100,7 +100,7 @@ class Function:
         inverse_mapping = {v: k for k, v in self.mapping.items()}
         try:
             inverse_function = Function(self.target, self.source, inverse_mapping)
-        except ValueError as e:
+        except ValueError as _:
             # Uncomment the print statement if you want to see why the inverse couldn't be created
             # print(f"Could not create the inverse function: {e}")
             return False

@@ -19,7 +19,7 @@ class Topology:
     known_topologies: Dict[str, 'Topology'] = {}  # Class attribute to store known topologies
 
     def __init__(self, collection_of_subsets: List[Set], generate: bool = False):
-        """
+        r"""
         Initializes the topology. If the provided collection of subsets does not form a topology
         and `generate` is True, generates the minimal topology that contains them.
 
@@ -38,7 +38,7 @@ class Topology:
 
         # Check if the collection of subsets forms a topology
         if self.is_topology(subsets=collection_of_subsets):
-            self.collection_of_subsets: List[Set[Any]] = collection_of_subsets
+            self.collection_of_subsets: List[Set[Any]] = collection_of_subsets.copy()
         elif generate:
             self.collection_of_subsets = self.generate_minimal_topology(collection_of_subsets)
             logger.warning("A minimal topology was generated due to `generate=True`.")
@@ -47,7 +47,7 @@ class Topology:
             logger.warning("The provided collection of subsets does not form a topology.")
 
     def is_topology(self, subsets: List[Set] = None) -> bool:
-        """
+        r"""
         Verifies if a collection of subsets forms a topology.
         Must contain the empty set and the complete space, and be closed under unions and intersections.
 
@@ -75,7 +75,7 @@ class Topology:
         return True
 
     def generate_minimal_topology(self, subsets: List[Set]) -> List[Set]:
-        """
+        r"""
         Generates the minimal topology for a collection of subsets and the given space.
         Includes the empty set and the complete space.
 
@@ -105,10 +105,10 @@ class Topology:
                         added = True
             minimal_topology.update(new_subsets)
 
-        return [set(s) for s in minimal_topology]
+        return [set(s) for s in minimal_topology].copy()
 
     def add_set(self, new_set: Union[Set, List, tuple]) -> bool:
-        """
+        r"""
         Adds a new set to the collection of subsets.
 
         Parameters:
@@ -141,7 +141,7 @@ class Topology:
             return False
 
     def get_ordered_subsets(self) -> List[Set[Any]]:
-        """
+        r"""
         Returns the collection of subsets aesthetically ordered.
 
         Returns:
@@ -165,7 +165,7 @@ class Topology:
         return ordered_subsets
 
     def __repr__(self) -> str:
-        """
+        r"""
         Returns a string representation of the Topology instance, including its properties.
         """
         is_topology = self.is_topology()
@@ -215,7 +215,7 @@ class Topology:
         )
 
     def __len__(self) -> int:
-        """
+        r"""
         Returns the number of subsets in the collection.
 
         Returns:
@@ -224,7 +224,7 @@ class Topology:
         return len(self.collection_of_subsets)
 
     def __eq__(self, other) -> bool:
-        """
+        r"""
         Compares two topologies for structural equality.
 
         Parameters:
@@ -236,7 +236,7 @@ class Topology:
         return self.is_structurally_equal(other)
 
     def is_structurally_equal(self, other: 'Topology') -> bool:
-        """
+        r"""
         Checks if two topologies have the same structure, regardless of the elements.
 
         Parameters:
@@ -274,7 +274,7 @@ class Topology:
         return False
 
     def identify_topology(self, known_topologies: Dict[str, 'Topology']) -> List[str]:
-        """
+        r"""
         Identifies the topology by comparing it to a list of known topologies.
 
         Parameters:
@@ -290,14 +290,14 @@ class Topology:
         return matches
 
     def get_basis(self) -> List[Set[Any]]:
-        """
+        r"""
         Computes and returns a basis for the topology.
 
-        A **basis** for a topology :math:`\\tau` on a set :math:`X` is a collection of open sets :math:`\\mathcal{B}` such that every open set in :math:`\\tau` can be written as a union of sets in :math:`\\mathcal{B}`.
+        A **basis** for a topology :math:`\tau` on a set :math:`X` is a collection of open sets :math:`\mathcal{B}` such that every open set in :math:`\tau` can be written as a union of sets in :math:`\mathcal{B}`.
 
         .. math::
 
-            \\forall U \\in \\tau, \\quad \\exists \\{ B_i \\}_{i \\in I} \\subseteq \\mathcal{B}, \\quad U = \\bigcup_{i \\in I} B_i
+            \forall U \in \tau, \quad \exists \{ B_i \}_{i \in I} \subseteq \mathcal{B}, \quad U = \bigcup_{i \in I} B_i
 
         Returns:
             list[set]: A list of sets representing the basis of the topology.
@@ -326,15 +326,15 @@ class Topology:
         return basis
 
     def is_discrete(self) -> bool:
-        """
+        r"""
         Checks if the topology is discrete.
 
         A **discrete topology** on a set :math:`X` is the topology in which every subset of :math:`X` is open.
-        This means the topology :math:`\\tau` is equal to the power set of :math:`X`.
+        This means the topology :math:`\tau` is equal to the power set of :math:`X`.
 
         .. math::
 
-            \\tau = \\mathcal{P}(X)
+            \tau = \mathcal{P}(X)
 
         Returns:
             bool: True if the topology is discrete, False otherwise.
@@ -354,7 +354,7 @@ class Topology:
         return topology_set == power_set
 
     def is_indiscrete(self) -> bool:
-        """
+        r"""
         Checks if the topology is indiscrete.
 
         An **indiscrete topology** on a set :math:`X` is the topology in which the unique open non-empty subset is :math:`X`.
@@ -368,14 +368,14 @@ class Topology:
             return False
 
     def is_connected(self) -> bool:
-        """
+        r"""
         Checks if the topological space is connected.
 
-        A topological space :math:`(X, \\tau)` is **connected** if it cannot be represented as the union of two disjoint non-empty open sets.
+        A topological space :math:`(X, \tau)` is **connected** if it cannot be represented as the union of two disjoint non-empty open sets.
 
         .. math::
 
-            \\text{A space is connected if } \\nexists U, V \\in \\tau, \\quad U \\cap V = \\emptyset, \\; U \\cup V = X, \\; U \\neq \\emptyset, \\; V \\neq \\emptyset
+            \text{A space is connected if } \nexists U, V \in \tau, \quad U \cap V = \emptyset, \; U \cup V = X, \; U \neq \emptyset, \; V \neq \emptyset
 
         Returns:
             bool: True if the space is connected, False otherwise.
@@ -404,7 +404,7 @@ class Topology:
 
     @staticmethod
     def is_compact() -> bool:
-        """
+        r"""
         Checks if the topological space is compact.
 
         A topological space is **compact** if every open cover has a finite subcover.
@@ -413,17 +413,17 @@ class Topology:
 
         Definitions:
 
-        - **Open Cover**: An open cover of a set :math:`X` in a topological space :math:`(X, \\tau)` is a collection of open sets :math:`\\{U_i\\}_{i \\in I}` such that the union of all :math:`U_i` contains the set :math:`X`:
+        - **Open Cover**: An open cover of a set :math:`X` in a topological space :math:`(X, \tau)` is a collection of open sets :math:`\{U_i\}_{i \in I}` such that the union of all :math:`U_i` contains the set :math:`X`:
 
           .. math::
 
-            X \\subseteq \\bigcup_{i \\in I} U_i
+            X \subseteq \bigcup_{i \in I} U_i
 
-        - **Subcover**: A subcover is a subcollection of the open cover that still covers the set :math:`X`. In other words, if :math:`\\{U_i\\}_{i \\in I}` is an open cover of :math:`X`, a **subcover** is a subcollection :math:`\\{U_j\\}_{j \\in J}`, where :math:`J \\subseteq I`, such that:
+        - **Subcover**: A subcover is a subcollection of the open cover that still covers the set :math:`X`. In other words, if :math:`\{U_i\}_{i \in I}` is an open cover of :math:`X`, a **subcover** is a subcollection :math:`\{U_j\}_{j \in J}`, where :math:`J \subseteq I`, such that:
 
           .. math::
 
-            X \\subseteq \\bigcup_{j \\in J} U_j
+            X \subseteq \bigcup_{j \in J} U_j
 
         Returns:
             bool: True if the space is compact, False otherwise.
@@ -432,7 +432,7 @@ class Topology:
         return True
 
     def is_open(self, subset: set) -> bool:
-        """
+        r"""
         Checks if the given subset is open in the topological space.
 
         Parameters:
@@ -448,7 +448,7 @@ class Topology:
             return False
 
     def is_closed(self, subset: set) -> bool:
-        """
+        r"""
         Checks if the given subset is closed in the topological space.
 
         A set is **closed** if its complement is open.
@@ -467,14 +467,14 @@ class Topology:
             return False
 
     def get_complement(self, subset: set) -> set:
-        """
+        r"""
         Returns the complement of the given subset in the topological space.
 
         The **complement** of a set \(A\) in a topological space \(X\) is the set of elements in \(X\) that are not in \(A\).
 
         .. math::
 
-            \\text{Complement}(A) = X \\setminus A
+            \text{Complement}(A) = X \setminus A
 
         Parameters:
             subset (set): The subset for which the complement is to be obtained.
@@ -488,15 +488,15 @@ class Topology:
         return self.space - subset
 
     def find_dense_subset(self) -> Set[Any]:
-        """
+        r"""
         Finds and returns a dense subset of the topological space.
 
-        A **dense subset** of a topological space :math:`(X, \\tau)` is a subset :math:`A \\subseteq X` such that the closure of :math:`A` is equal to :math:`X`.
+        A **dense subset** of a topological space :math:`(X, \tau)` is a subset :math:`A \subseteq X` such that the closure of :math:`A` is equal to :math:`X`.
         In other words, :math:`A` is dense if every point in :math:`X` is either in :math:`A` or is a limit point of :math:`A`.
 
         .. math::
 
-            A \\text{ is dense in } X \\text{ if } \\overline{A} = X
+            A \text{ is dense in } X \text{ if } \overline{A} = X
 
         Returns:
             set: A dense subset if it exists, otherwise the entire space if it is the only dense subset (trivial case).
@@ -527,7 +527,7 @@ class Topology:
         order_relation: Union[Callable[[Any, Any], bool], Dict[Any, Set[Any]]],
         relation_type: str = 'function'
     ) -> 'Topology':
-        """
+        r"""
         Creates the Alexandrov topology on the given space based on an order relation.
 
         The **Alexandrov topology** is a topology where every intersection of open sets is also open. It is commonly used in domain theory and theoretical computer science.
@@ -535,8 +535,8 @@ class Topology:
         Parameters:
             space (set): The set on which the topology is defined.
             order_relation (function or dict):
-                - If `relation_type` is 'function': A function that takes two elements :math:`x, y` and returns True if :math:`x \\leq y`.
-                - If `relation_type` is 'dict': A dictionary where :math:`\\text{order_relation}[x]` is a set of elements greater than or equal to :math:`x`.
+                - If `relation_type` is 'function': A function that takes two elements :math:`x, y` and returns True if :math:`x \leq y`.
+                - If `relation_type` is 'dict': A dictionary where :math:`\text{order_relation}[x]` is a set of elements greater than or equal to :math:`x`.
 
             relation_type (str): Specifies the type of `order_relation` ('function' or 'dict').
 
@@ -544,11 +544,11 @@ class Topology:
             Topology: An instance of the Topology class representing the Alexandrov topology.
 
         Example:
-            If the space is :math:`\\{a, b, c\\}` and the order relation is given by :math:`a \\leq b` and :math:`b \\leq c`, the Alexandrov topology will include sets that respect this order relation.
+            If the space is :math:`\{a, b, c\}` and the order relation is given by :math:`a \leq b` and :math:`b \leq c`, the Alexandrov topology will include sets that respect this order relation.
 
         .. math::
 
-            \\forall x, y \\in X, \\quad U \\cap V \\in \\tau \\quad \\text{for all } U, V \\in \\tau
+            \forall x, y \in X, \quad U \cap V \in \tau \quad \text{for all } U, V \in \tau
         """
         if relation_type == 'function':
             # Generate upper sets using the relation function
@@ -580,7 +580,7 @@ class Topology:
         return Topology(collection_of_subsets=subsets, generate=False)
 
     def is_separable(self) -> bool:
-        """
+        r"""
         Checks if the topological space is separable.
 
         A **separable space** is one that contains a countable, dense subset.
@@ -605,15 +605,15 @@ class Topology:
         return False
 
     def get_closure(self, subset: set) -> set:
-        """
+        r"""
         Obtains the closure of a given set in the topological space.
 
-        The **closure** of a set :math:`A` in a topological space :math:`(X, \\tau)` is the smallest closed set containing :math:`A`.
+        The **closure** of a set :math:`A` in a topological space :math:`(X, \tau)` is the smallest closed set containing :math:`A`.
         It can be defined as the intersection of all closed sets containing :math:`A`.
 
         .. math::
 
-            \\overline{A} = \\bigcap \\{ C \\in \\tau^c : A \\subseteq C \\}
+            \overline{A} = \bigcap \{ C \in \tau^c : A \subseteq C \}
 
         Parameters:
             subset (set): The set for which the closure is to be obtained.
@@ -622,6 +622,9 @@ class Topology:
             set: The closure of the set.
         :raises ValueError: If `subset` is not a subset of the space.
         """
+        if not subset.issubset(self.space):
+            raise ValueError(f"The set {subset} is not a subset of the space {self.space}.")
+
         # Define closed sets as complements of open sets
         closed_sets = [self.space - open_set for open_set in self.collection_of_subsets]
 
@@ -636,14 +639,14 @@ class Topology:
         return closure
 
     def is_hausdorff(self) -> bool:
-        """
+        r"""
         Checks if the topological space is Hausdorff (T2).
 
-        A topological space :math:`(X, \\tau)` is **Hausdorff** if, for any two distinct points, there exist disjoint open sets containing each of the points.
+        A topological space :math:`(X, \tau)` is **Hausdorff** if, for any two distinct points, there exist disjoint open sets containing each of the points.
 
         .. math::
 
-            \\forall x, y \\in X, \\quad x \\neq y \\implies \\exists U, V \\in \\tau, \\quad x \\in U, \\quad y \\in V, \\quad U \\cap V = \\emptyset
+            \forall x, y \in X, \quad x \neq y \implies \exists U, V \in \tau, \quad x \in U, \quad y \in V, \quad U \cap V = \emptyset
 
         Returns:
             bool: True if the space is Hausdorff, False otherwise.
@@ -666,14 +669,14 @@ class Topology:
         return True
 
     def get_interior(self, subset: set) -> set:
-        """
+        r"""
         Obtains the interior of a given set in the topological space.
 
-        The **interior** of a set :math:`A` in a topological space :math:`(X, \\tau)` is the largest open set contained within :math:`A`. Formally:
+        The **interior** of a set :math:`A` in a topological space :math:`(X, \tau)` is the largest open set contained within :math:`A`. Formally:
 
         .. math::
 
-            \\text{Interior}(A) = \\bigcup \\{ U \\in \\tau : U \\subseteq A \\}
+            \text{Interior}(A) = \bigcup \{ U \in \tau : U \subseteq A \}
 
         Parameters:
             subset (set): The set for which the interior is to be obtained.
@@ -688,14 +691,14 @@ class Topology:
         return interior
 
     def get_boundary(self, subset: set) -> set:
-        """
+        r"""
         Obtains the boundary of a given set in the topological space.
 
-        The **boundary** of a set :math:`A` in a topological space :math:`(X, \\tau)` is defined as the difference between the closure and the interior of :math:`A`. Formally:
+        The **boundary** of a set :math:`A` in a topological space :math:`(X, \tau)` is defined as the difference between the closure and the interior of :math:`A`. Formally:
 
         .. math::
 
-            \\partial A = \\overline{A} \\setminus \\text{Interior}(A)
+            \partial A = \overline{A} \setminus \text{Interior}(A)
 
         Parameters:
             subset (set): The set for which the boundary is to be obtained.
@@ -709,14 +712,14 @@ class Topology:
         return boundary
 
     def get_exterior(self, subset: set) -> set:
-        """
+        r"""
         Obtains the exterior of a given set in the topological space.
 
-        The **exterior** of a set :math:`A` in a topological space :math:`(X, \\tau)` is defined as the interior of its complement.
+        The **exterior** of a set :math:`A` in a topological space :math:`(X, \tau)` is defined as the interior of its complement.
 
         .. math::
 
-            \\text{Exterior}(A) = \\text{Interior}(X \\setminus A)
+            \text{Exterior}(A) = \text{Interior}(X \setminus A)
 
         Parameters:
             subset (set): The set for which the exterior is to be obtained.
@@ -729,14 +732,14 @@ class Topology:
         return exterior
 
     def is_T0(self) -> bool:
-        """
+        r"""
         Checks if the topological space is T0.
 
         In a T0 space (Kolmogorov space), for every pair of distinct points, there exists an open set containing one of the points but not the other.
 
         .. math::
 
-            \\forall x, y \\in X, \\quad x \\neq y \\implies \\exists U \\in \\tau, \\quad (x \\in U \\wedge y \\notin U) \\text{ or } (y \\in U \\wedge x \\notin U)
+            \forall x, y \in X, \quad x \neq y \implies \exists U \in \tau, \quad (x \in U \wedge y \notin U) \text{ or } (y \in U \wedge x \notin U)
 
         Returns:
             bool: True if the space is T0, False otherwise.
@@ -753,10 +756,10 @@ class Topology:
         return True
 
     def is_T1(self) -> bool:
-        """
+        r"""
         Checks if the topological space is T1.
 
-        A topological space :math:`(X, \\tau)` is **T1** if, for every pair of distinct points,
+        A topological space :math:`(X, \tau)` is **T1** if, for every pair of distinct points,
         each has a neighborhood that does not contain the other.
 
         Additionally, in a T1 space, every single point must be closed, meaning
@@ -764,8 +767,8 @@ class Topology:
 
         .. math::
 
-            \\forall x, y \\in X, \\quad x \\neq y \\implies \\exists U, V \\in \\tau, \\quad
-            (x \\in U \\wedge y \\notin U) \\wedge (y \\in V \\wedge x \\notin V)
+            \forall x, y \in X, \quad x \neq y \implies \exists U, V \in \tau, \quad
+            (x \in U \wedge y \notin U) \wedge (y \in V \wedge x \notin V)
 
         Returns:
             bool: True if the space is T1, False otherwise.
