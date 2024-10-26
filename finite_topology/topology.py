@@ -1,5 +1,8 @@
-from typing import Union, Callable
+from typing import Union, Callable, List, Set, Dict, Any
 from itertools import permutations, combinations, chain
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Topology:
@@ -13,101 +16,136 @@ class Topology:
     - space (set): The space on which the topology is defined.
     - collection_of_subsets (list): Collection of subsets that form the topology.
     """
-    known_topologies = {}  # Class attribute to store known topologies
+    known_topologies: Dict[str, 'Topology'] = {}  # Class attribute to store known topologies
 
-    def __init__(self, space, collection_of_subsets):
+    def __init__(self, collection_of_subsets: List[Set], generate: bool = False):
         """
-        Initializes a topology with a given space and a collection of subsets.
+        Initializes the topology. If the provided collection of subsets does not form a topology
+        and `generate` is True, generates the minimal topology that contains them.
 
-        Parameters:
-        space (iterable): The set representing the space.
-        collection_of_subsets (iterable of iterables): The collection of subsets forming the topology.
+        :param collection_of_subsets: Collection of subsets. Must be provided to define a topology.
+        :type collection_of_subsets: List[Set]
+        :param generate: If True and `collection_of_subsets` is not a topology, generates the minimal topology.
+        :type generate: bool
+        :raises ValueError: If `collection_of_subsets` is None.
         """
-        self.space = set(space)
-        # Ensure uniqueness of subsets
-        unique_subsets = set(frozenset(s) for s in collection_of_subsets)
-        self.collection_of_subsets = [set(s) for s in unique_subsets]
+        # Raise an exception if collection_of_subsets is None
+        if collection_of_subsets is None:
+            raise ValueError("`collection_of_subsets` must be provided to define a topology.")
 
-    def is_topology(self) -> bool:
-        """
-        Checks if the collection of subsets forms a topology on the given space.
+        # Calculate the space as the union of all provided subsets
+        self.space: Set[Any] = set().union(*collection_of_subsets) if collection_of_subsets else set()
 
-        Returns:
-        bool: True if the collection is a topology, False otherwise.
+        # Check if the collection of subsets forms a topology
+        if self.is_topology(subsets=collection_of_subsets):
+            self.collection_of_subsets: List[Set[Any]] = collection_of_subsets
+        elif generate:
+            self.collection_of_subsets = self.generate_minimal_topology(collection_of_subsets)
+            logger.warning("A minimal topology was generated due to `generate=True`.")
+        else:
+            self.collection_of_subsets = collection_of_subsets
+            logger.warning("The provided collection of subsets does not form a topology.")
+
+    def is_topology(self, subsets: List[Set] = None) -> bool:
         """
-        # Check if the empty set and the entire space are in the collection
-        if set() not in self.collection_of_subsets:
-            print("The empty set is not in the collection.")
+        Verifies if a collection of subsets forms a topology.
+        Must contain the empty set and the complete space, and be closed under unions and intersections.
+
+        :param subsets: Collection of subsets to verify.
+        :type subsets: List[Set], optional
+        :return: True if `subsets` is a topology, False otherwise.
+        :rtype: bool
+        """
+        if subsets is None:
+            subsets = self.collection_of_subsets
+
+        # If the space is empty, the only valid topology is {set()}
+        if self.space == set():
+            return subsets == [set()]
+
+        # For a non-empty space, check that the collection contains the empty set and the entire space
+        if set() not in subsets or self.space not in subsets:
             return False
-        if self.space not in self.collection_of_subsets:
-            print("The entire space is not in the collection.")
-            return False
 
-        n = len(self.collection_of_subsets)
-
-        # Check if arbitrary unions of elements are in the collection
-        for i in range(1, 2 ** n):
-            union = set()
-            for j in range(n):
-                if (i >> j) & 1:
-                    union = union.union(self.collection_of_subsets[j])
-            if union not in self.collection_of_subsets:
-                print(f"The union {union} is not in the collection.")
-                return False
-
-        # Check if finite intersections of elements are in the collection
-        for i in range(1, 2 ** n):
-            indices = [j for j in range(n) if (i >> j) & 1]
-            if len(indices) <= 1:
-                continue  # The intersection of a single set is the set itself
-            intersection = self.collection_of_subsets[indices[0]]
-            for idx in indices[1:]:
-                intersection = intersection.intersection(self.collection_of_subsets[idx])
-            if intersection not in self.collection_of_subsets:
-                print(f"The intersection {intersection} is not in the collection.")
-                return False
-
+        # Check closure under unions and intersections
+        for a in subsets:
+            for b in subsets:
+                if a | b not in subsets or a & b not in subsets:
+                    return False
         return True
 
-    def add_set(self, new_set) -> bool:
+    def generate_minimal_topology(self, subsets: List[Set]) -> List[Set]:
+        """
+        Generates the minimal topology for a collection of subsets and the given space.
+        Includes the empty set and the complete space.
+
+        :param subsets: Collection of subsets to include in the topology.
+        :type subsets: List[Set]
+        :return: List of subsets forming the minimal topology.
+        :rtype: List[Set]
+        """
+        # Start with the empty set and the complete space
+        minimal_topology = {frozenset(), frozenset(self.space)}
+        minimal_topology.update(frozenset(s) for s in subsets)  # Add the provided subsets
+
+        # Ensure closure under unions and intersections
+        added = True
+        while added:
+            added = False
+            new_subsets = set()
+            for a in minimal_topology:
+                for b in minimal_topology:
+                    union_ab = a.union(b)
+                    intersection_ab = a.intersection(b)
+                    if union_ab not in minimal_topology:
+                        new_subsets.add(union_ab)
+                        added = True
+                    if intersection_ab not in minimal_topology:
+                        new_subsets.add(intersection_ab)
+                        added = True
+            minimal_topology.update(new_subsets)
+
+        return [set(s) for s in minimal_topology]
+
+    def add_set(self, new_set: Union[Set, List, tuple]) -> bool:
         """
         Adds a new set to the collection of subsets.
 
         Parameters:
-        new_set (iterable): The new set to be added to the collection.
+            new_set (Union[Set, List, tuple]): The new set to be added to the collection.
 
         Returns:
-        bool: True if the new set is added successfully and the collection remains a topology, False otherwise.
+            bool: True if the new set is added successfully and the collection remains a topology, False otherwise.
         """
         new_set = set(new_set)
         if not new_set.issubset(self.space):
-            print(f"The set {new_set} is not a subset of the space {self.space}. Cannot add.")
+            logger.error(f"The set {new_set} is not a subset of the space {self.space}. Cannot add.")
             return False
 
         if new_set not in self.collection_of_subsets:
             self.collection_of_subsets.append(new_set)
-            print(f"Added the set {new_set} to the collection.")
+            logger.info(f"Added the set {new_set} to the collection.")
             if self.is_open(new_set):
-                print(f"The set {new_set} is open.")
+                logger.info(f"The set {new_set} is open.")
             if self.is_closed(new_set):
-                print(f"The set {new_set} is closed.")
+                logger.info(f"The set {new_set} is closed.")
         else:
-            print(f"The set {new_set} is already in the collection.")
+            logger.warning(f"The set {new_set} is already in the collection.")
 
         # Verify if the collection is still a topology
         if self.is_topology():
-            print("After adding, the collection is still a topology.")
+            logger.info("After adding, the collection is still a topology.")
             return True
         else:
-            print("After adding, the collection is no longer a topology.")
+            logger.error("After adding, the collection is no longer a topology.")
             return False
 
-    def get_ordered_subsets(self) -> list:
+    def get_ordered_subsets(self) -> List[Set[Any]]:
         """
         Returns the collection of subsets aesthetically ordered.
 
         Returns:
-        List[Set]: List of subsets ordered by the specified criterion.
+            List[Set[Any]]: List of subsets ordered by the specified criterion.
         """
         # Separate the entire space and the empty set
         space_set = self.space
@@ -138,8 +176,11 @@ class Topology:
         subsets_str = "\n    ".join(str(sorted(s)) for s in ordered_subsets)
 
         if not is_topology:
-            return (f"  Collection of Subsets:\n"
-                    f"    {subsets_str}\n")
+            return (
+                f"{id_str}(\n"
+                f"  Collection of Subsets:\n"
+                f"    {subsets_str}\n)"
+            )
         # Check properties
         properties = []
 
@@ -165,18 +206,20 @@ class Topology:
         # Build properties string
         properties_str = ', '.join(properties) if properties else 'None'
 
-        return (f"{id_str}(\n"
-                f"  Space: {sorted(self.space)},\n"
-                f"  Collection of Subsets:\n"
-                f"    {subsets_str}\n"
-                f"  Properties: {properties_str}\n)")
+        return (
+            f"{id_str}(\n"
+            f"  Space: {sorted(self.space)},\n"
+            f"  Collection of Subsets:\n"
+            f"    {subsets_str}\n"
+            f"  Properties: {properties_str}\n)"
+        )
 
     def __len__(self) -> int:
         """
         Returns the number of subsets in the collection.
 
         Returns:
-        int: Number of subsets.
+            int: Number of subsets.
         """
         return len(self.collection_of_subsets)
 
@@ -185,10 +228,10 @@ class Topology:
         Compares two topologies for structural equality.
 
         Parameters:
-        other (Topology): Another topology to compare.
+            other (Topology): Another topology to compare.
 
         Returns:
-        bool: True if the topologies are structurally equal, False otherwise.
+            bool: True if the topologies are structurally equal, False otherwise.
         """
         return self.is_structurally_equal(other)
 
@@ -197,10 +240,10 @@ class Topology:
         Checks if two topologies have the same structure, regardless of the elements.
 
         Parameters:
-        other (Topology): Another topology to compare.
+            other (Topology): Another topology to compare.
 
         Returns:
-        bool: True if the topologies have the same structure, False otherwise.
+            bool: True if the topologies have the same structure, False otherwise.
         """
         if not isinstance(other, Topology):
             return False
@@ -222,23 +265,23 @@ class Topology:
             mapping = dict(zip(self_elements, perm))
 
             # Apply mapping to all subsets in self.collection_of_subsets
-            mapped_subsets = [set(mapping[e] for e in subset) for subset in self.collection_of_subsets]
+            mapped_subsets = [frozenset(mapping[e] for e in subset) for subset in self.collection_of_subsets]
 
             # Compare the mapped subsets with the collection of subsets of the other
-            if set(frozenset(s) for s in mapped_subsets) == set(frozenset(s) for s in other.collection_of_subsets):
+            if set(mapped_subsets) == set(frozenset(s) for s in other.collection_of_subsets):
                 return True
 
         return False
 
-    def identify_topology(self, known_topologies) -> list:
+    def identify_topology(self, known_topologies: Dict[str, 'Topology']) -> List[str]:
         """
         Identifies the topology by comparing it to a list of known topologies.
 
         Parameters:
-        known_topologies (dict): A dictionary with names as keys and Topology objects as values.
+            known_topologies (dict): A dictionary with names as keys and Topology objects as values.
 
         Returns:
-        list: Names of known topologies that are homeomorphic to this topology.
+            list: Names of known topologies that are homeomorphic to this topology.
         """
         matches = []
         for name, known_topo in known_topologies.items():
@@ -246,7 +289,7 @@ class Topology:
                 matches.append(name)
         return matches
 
-    def get_basis(self) -> list:
+    def get_basis(self) -> List[Set[Any]]:
         """
         Computes and returns a basis for the topology.
 
@@ -310,11 +353,11 @@ class Topology:
         # Check if the collection of subsets matches the power set
         return topology_set == power_set
 
-    def is_indiscrete(self):
+    def is_indiscrete(self) -> bool:
         """
         Checks if the topology is indiscrete.
 
-        An **indiscrete topology** on a set :math:`X` is the topology in which the unique open not empty subset is :math:`X`.
+        An **indiscrete topology** on a set :math:`X` is the topology in which the unique open non-empty subset is :math:`X`.
 
         Returns:
             bool: True if the topology is indiscrete, False otherwise.
@@ -354,7 +397,7 @@ class Topology:
                 # Check if U and V are open
                 if U in self.collection_of_subsets and V in self.collection_of_subsets:
                     # Found a partition that separates the space, it is not connected
-                    print(f"Space separated into U={sorted(U)} and V={sorted(V)}.")
+                    logger.info(f"Space separated into U={sorted(U)} and V={sorted(V)}.")
                     return False
 
         return True
@@ -393,15 +436,15 @@ class Topology:
         Checks if the given subset is open in the topological space.
 
         Parameters:
-        subset (set): The set to be checked.
+            subset (set): The set to be checked.
 
         Returns:
-        bool: True if the subset is open, False otherwise.
+            bool: True if the subset is open, False otherwise.
         """
         if subset in self.collection_of_subsets:
             return True
         else:
-            print(f"The set {sorted(subset)} is not open.")
+            logger.debug(f"The set {sorted(subset)} is not open.")
             return False
 
     def is_closed(self, subset: set) -> bool:
@@ -411,16 +454,16 @@ class Topology:
         A set is **closed** if its complement is open.
 
         Parameters:
-        subset (set): The set to be checked.
+            subset (set): The set to be checked.
 
         Returns:
-        bool: True if the subset is closed, False otherwise.
+            bool: True if the subset is closed, False otherwise.
         """
         complement = self.space - subset
         if complement in self.collection_of_subsets:
             return True
         else:
-            print(f"The set {sorted(subset)} is not closed.")
+            logger.debug(f"The set {sorted(subset)} is not closed.")
             return False
 
     def get_complement(self, subset: set) -> set:
@@ -434,16 +477,17 @@ class Topology:
             \\text{Complement}(A) = X \\setminus A
 
         Parameters:
-        subset (set): The subset for which the complement is to be obtained.
+            subset (set): The subset for which the complement is to be obtained.
 
         Returns:
-        set: The complement of the subset in the topological space.
+            set: The complement of the subset in the topological space.
+        :raises ValueError: If `subset` is not a subset of the space.
         """
         if not subset.issubset(self.space):
             raise ValueError(f"The set {subset} is not a subset of the space {self.space}.")
         return self.space - subset
 
-    def find_dense_subset(self) -> set:
+    def find_dense_subset(self) -> Set[Any]:
         """
         Finds and returns a dense subset of the topological space.
 
@@ -468,7 +512,7 @@ class Topology:
 
         # If the only dense subset is the entire space, return it with a note that it's trivial
         if len(dense_subsets) == 1 and dense_subsets[0] == self.space:
-            print("The only dense subset is the entire space, which is a trivial case in finite topologies.")
+            logger.info("The only dense subset is the entire space, which is a trivial case in finite topologies.")
             return self.space
 
         # Return the smallest non-trivial dense subset
@@ -478,10 +522,11 @@ class Topology:
         return set()
 
     @staticmethod
-    def create_alexandrov_topology(space: set,
-                                   order_relation: Union[Callable[[int, int], bool], dict],
-                                   # La función toma dos enteros y retorna un booleano
-                                   relation_type: str = 'function') -> 'Topology':
+    def create_alexandrov_topology(
+        space: Set[Any],
+        order_relation: Union[Callable[[Any, Any], bool], Dict[Any, Set[Any]]],
+        relation_type: str = 'function'
+    ) -> 'Topology':
         """
         Creates the Alexandrov topology on the given space based on an order relation.
 
@@ -532,7 +577,7 @@ class Topology:
         if set(space) not in subsets:
             subsets.append(set(space))
 
-        return Topology(space, subsets)
+        return Topology(collection_of_subsets=subsets, generate=False)
 
     def is_separable(self) -> bool:
         """
@@ -561,19 +606,21 @@ class Topology:
 
     def get_closure(self, subset: set) -> set:
         """
-        Obtains the exterior of a given set in the topological space.
+        Obtains the closure of a given set in the topological space.
 
-        The **exterior** of a set :math:`A` in a topological space :math:`(X, \\tau)` is defined as the interior of its complement.
+        The **closure** of a set :math:`A` in a topological space :math:`(X, \\tau)` is the smallest closed set containing :math:`A`.
+        It can be defined as the intersection of all closed sets containing :math:`A`.
 
         .. math::
 
-            \\text{Exterior}(A) = \\text{Interior}(X \\setminus A)
+            \\overline{A} = \\bigcap \\{ C \\in \\tau^c : A \\subseteq C \\}
 
         Parameters:
-            subset (set): The set for which the exterior is to be obtained.
+            subset (set): The set for which the closure is to be obtained.
 
         Returns:
-            set: The exterior of the set.
+            set: The closure of the set.
+        :raises ValueError: If `subset` is not a subset of the space.
         """
         # Define closed sets as complements of open sets
         closed_sets = [self.space - open_set for open_set in self.collection_of_subsets]
@@ -614,7 +661,7 @@ class Topology:
                 if separated:
                     break
             if not separated:
-                print(f"Cannot separate points {x} and {y} with disjoint open sets.")
+                logger.debug(f"Cannot separate points {x} and {y} with disjoint open sets.")
                 return False
         return True
 
@@ -701,7 +748,7 @@ class Topology:
             y_separates = any(y in U and x not in U for U in self.collection_of_subsets)
 
             if not (x_separates or y_separates):
-                print(f"Cannot separate {x} and {y} in a T0 space.")
+                logger.debug(f"Cannot separate {x} and {y} in a T0 space.")
                 return False
         return True
 
@@ -730,7 +777,7 @@ class Topology:
 
             # Check if the complement is an open set
             if complement not in self.collection_of_subsets:
-                print(f"Point {point} is not closed, complement {complement} is not open.")
+                logger.debug(f"Point {point} is not closed, complement {complement} is not open.")
                 return False
 
         # If all points are closed (i.e., their complements are open), the space is T1
