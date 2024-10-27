@@ -192,7 +192,7 @@ For a more in-depth exploration, the Jupyter notebooks in the GitHub repository 
 
 ## Documentation
 
-The complete documentation, including class details and function usage, is generated via Sphinx and hosted on GitHub Pages.
+The complete documentation, including class details and function usage, is generated via Sphinx and hosted on GitHub Pages: https://nand0san.github.io/Topology/
 
 ## Contributing
 
