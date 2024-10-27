@@ -29,6 +29,8 @@ class Topology:
         :type generate: bool
         :raises ValueError: If `collection_of_subsets` is None.
         """
+        if type(generate) != bool:
+            raise ValueError("`generate` must be a boolean value.")
         # Raise an exception if collection_of_subsets is None
         if collection_of_subsets is None:
             raise ValueError("`collection_of_subsets` must be provided to define a topology.")

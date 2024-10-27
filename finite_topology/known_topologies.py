@@ -233,7 +233,7 @@ def create_topology_from_equivalence(space: Set[Any], equivalence_relation: Call
     return Topology(collection_of_subsets=final_subsets, generate=False)
 
 
-def create_upward_closed_topology(space: Set[Any], order_relation: Callable[[Any, Any], bool]) -> Topology:
+def create_upward_closed_topology(space: Set[Any], order_relation: Dict[Any, Any]) -> Topology:
     r"""
     Create a topology where open sets are upward-closed sets in a partial order.
 
@@ -258,7 +258,11 @@ def create_upward_closed_topology(space: Set[Any], order_relation: Callable[[Any
     # Generar conjuntos ascendentes
     upper_sets: List[Set[Any]] = []
     for element in space:
-        upper_set = {x for x in space if order_relation(element, x)}
+        upper_set = set()
+        for x in space:
+            if x in order_relation[element]:
+
+                upper_set.add(x)
         upper_sets.append(upper_set)
         logger.debug(f"Conjunto ascendente generado para {element}: {upper_set}")
 
